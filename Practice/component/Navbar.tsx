@@ -1,56 +1,142 @@
+'use client';
+
 import Link from 'next/link';
-import React from 'react';
-import { Home as HomeIcon } from 'lucide-react';
+import React, { useState } from 'react';
+import { Home as HomeIcon, MapPin, Phone, Menu, X } from 'lucide-react';
+
+// Custom SVG Icons for Social Media
+const FacebookIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+  </svg>
+);
+
+const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+  </svg>
+);
+
+const InstagramIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+  </svg>
+);
+
+const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+    <rect x="2" y="9" width="4" height="12"></rect>
+    <circle cx="4" cy="4" r="2"></circle>
+  </svg>
+);
 
 const Navbar = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
-    <nav className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 px-4 py-3 shadow-xs backdrop-blur-md sm:px-6">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
-        
-        {/* Brand / Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white font-bold shadow-md shadow-blue-500/20 transition group-hover:scale-105">
-            <HomeIcon className="h-5 w-5" />
+    <div className="sticky top-0 z-50 w-full">
+      {/* Top Utility Bar */}
+      <div className="bg-[#1f2937] text-xs py-2 px-4 md:px-12 flex justify-between items-center border-b border-gray-800 text-gray-400">
+        <div className="flex items-center space-x-6">
+          <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-orange-500" /> Rupandehi, Butwal, Nepal</span>
+          <span className="flex items-center gap-1"><Phone className="w-3.5 h-3.5 text-orange-500" /> +977 9821005569</span>
+        </div>
+        <div className="flex items-center space-x-6">
+          <span className="hidden sm:inline">Mon to Sat: 09:00 to 23:00</span>
+          <div className="hidden md:flex items-center space-x-3">
+            <FacebookIcon className="w-3.5 h-3.5 hover:text-orange-500 cursor-pointer" />
+            <TwitterIcon className="w-3.5 h-3.5 hover:text-orange-500 cursor-pointer" />
+            <InstagramIcon className="w-3.5 h-3.5 hover:text-orange-500 cursor-pointer" />
+            <LinkedinIcon className="w-3.5 h-3.5 hover:text-orange-500 cursor-pointer" />
           </div>
-          <span className="text-lg font-bold tracking-tight text-slate-900">
-            Room<span className="text-blue-600">Stay</span>
-          </span>
-        </Link>
-
-        {/* Main Navigation Links */}
-        <div className="flex flex-wrap items-center justify-center gap-3 text-sm font-medium text-slate-600 sm:gap-8">
-          <Link href="/" className="transition hover:text-blue-600">
-            Home
-          </Link>
-          <Link href="/products" className="transition hover:text-blue-600">
-            Products
-          </Link>
-          <Link href="/contact" className="transition hover:text-blue-600">
-            Contact
-          </Link>
-          <Link href="/about" className="transition hover:text-blue-600">
-            About
-          </Link>
         </div>
-
-        {/* Auth Actions */}
-        <div className="flex items-center gap-3 sm:gap-4">
-          <Link 
-            href="/login" 
-            className="text-sm font-medium text-slate-700 transition hover:text-blue-600"
-          >
-            Login
-          </Link>
-          <Link 
-            href="/logout" 
-            className="rounded-xl border border-rose-200 bg-rose-50 px-3.5 py-2 text-sm font-medium text-rose-600 transition hover:bg-rose-100"
-          >
-            Logout
-          </Link>
-        </div>
-
       </div>
-    </nav>
+
+      {/* Main Navbar */}
+      <nav className="border-b border-gray-800 bg-[#111827]/95 px-4 py-3 shadow-md backdrop-blur-md sm:px-6 md:px-12">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
+          
+          {/* Brand / Logo */}
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-orange-500 text-white font-bold shadow-md shadow-orange-500/20 transition group-hover:scale-105">
+              <HomeIcon className="h-5 w-5" />
+            </div>
+            <span className="text-xl font-bold tracking-tight text-white">
+              Vee<span className="text-orange-500">doo</span>
+            </span>
+          </Link>
+
+          {/* Main Navigation Links (Desktop) */}
+          <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
+            <Link href="/" className="text-orange-500 transition hover:text-orange-400">
+              Home
+            </Link>
+            <Link href="/room" className="transition hover:text-orange-400">
+              Rooms
+            </Link>
+            <Link href="/contact" className="transition hover:text-orange-400">
+              Contact
+            </Link>
+            <Link href="/about" className="transition hover:text-orange-400">
+              About
+            </Link>
+          </div>
+
+          {/* Auth Actions (Desktop) */}
+          <div className="hidden md:flex items-center gap-3 sm:gap-4">
+            <Link 
+              href="/login" 
+              className="text-sm font-medium text-gray-300 transition hover:text-orange-400"
+            >
+              Login
+            </Link>
+            <Link 
+              href="/logout" 
+              className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-3.5 py-2 text-sm font-medium text-rose-400 transition hover:bg-rose-500/20"
+            >
+              Logout
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-gray-300 focus:outline-none">
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
+        </div>
+
+        {/* Mobile Dropdown Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden mt-4 pb-4 border-t border-gray-800 pt-4 flex flex-col space-y-3 text-sm font-medium text-gray-300">
+            <Link href="/" onClick={() => setMobileMenuOpen(false)} className="text-orange-500 transition">
+              Home
+            </Link>
+            <Link href="/room" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-400">
+              Rooms
+            </Link>
+            <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-400">
+              Contact
+            </Link>
+            <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-400">
+              About
+            </Link>
+            <div className="pt-2 flex items-center gap-3 border-t border-gray-800">
+              <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 hover:text-orange-400">
+                Login
+              </Link>
+              <Link href="/logout" onClick={() => setMobileMenuOpen(false)} className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-3.5 py-1.5 text-rose-400">
+                Logout
+              </Link>
+            </div>
+          </div>
+        )}
+      </nav>
+    </div>
   );
 };
 

@@ -1,154 +1,272 @@
-import Link from "next/link";
-import React from "react";
+'use client';
+
+import React, { useState } from 'react';
 import { 
-  ShieldCheck, 
-  Search, 
-  ArrowRight, 
-  Users, 
-  CheckCircle2 
-} from "lucide-react";
+  Building2, Home, Store, MapPin, Search, PhoneCall, 
+  Bed, Bath, Square, ShieldCheck, UserCheck, 
+  Key, FileText
+} from 'lucide-react';
 
-export default function Home() {
+export default function LandingPage() {
+  const [activeTab, setActiveTab] = useState('All Properties');
+
+  const categories = [
+    { name: 'Apartment', count: '6 Properties', icon: <Building2 className="w-6 h-6 text-orange-500" /> },
+    { name: 'Commercial', count: '4 Properties', icon: <Store className="w-6 h-6 text-orange-500" /> },
+    { name: 'Sale Shop', count: '3 Properties', icon: <Home className="w-6 h-6 text-orange-500" /> },
+    { name: 'Town Ship', count: '5 Properties', icon: <Building2 className="w-6 h-6 text-orange-500" /> },
+    { name: 'Villa', count: '8 Properties', icon: <Home className="w-6 h-6 text-orange-500" /> },
+  ];
+
+  const properties = [
+    {
+      title: 'Oakwood Manor Estates',
+      location: '39947 Washington Street, Id 83648',
+      price: '$148,000',
+      beds: 3,
+      baths: 2,
+      sqft: '2,415 Sq Ft',
+      image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=600',
+    },
+    {
+      title: 'Willowbrook Gres Estate',
+      location: '71830 Hana St, Wailea, Indonesia, ID 83686',
+      price: '$148,000',
+      beds: 3,
+      baths: 2,
+      sqft: '2,408 Sq Ft',
+      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=600',
+    },
+    {
+      title: 'Timberland Interior Legacy',
+      location: '44691 Barney Gateway, Japan, Id 83541',
+      price: '$128,000',
+      beds: 2,
+      baths: 2,
+      sqft: '2,805 Sq Ft',
+      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=600',
+    },
+    {
+      title: 'Cedar Ridge Residences',
+      location: '71830 Lok St, Wailea, Japan, ID 83569',
+      price: '$128,000',
+      beds: 2,
+      baths: 2,
+      sqft: '2,408 Sq Ft',
+      image: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&q=80&w=600',
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-600 selection:text-white">
+    <div className="min-h-screen bg-[#111827] text-gray-100 font-sans">
       
-      {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden px-4 pt-16 pb-20 text-center sm:px-6 md:pt-28 md:pb-32">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-50 via-slate-50/50 to-transparent" />
-        
-        <div className="mx-auto max-w-4xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/60 bg-blue-50/80 px-4 py-1.5 text-xs font-semibold text-blue-700 shadow-xs backdrop-blur-sm">
-            <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse" />
-            Over 1,200+ verified rooms available this month
-          </div>
+      {/* Hero Section */}
+      <header className="relative bg-[#111827] px-4 md:px-12 pt-8 pb-20">
+        <div className="max-w-7xl mx-auto rounded-3xl overflow-hidden relative bg-cover bg-center min-h-[500px] flex flex-col justify-between p-6 md:p-12 shadow-2xl"
+             style={{ backgroundImage: `linear-gradient(rgba(17, 24, 39, 0.6), rgba(17, 24, 39, 0.7)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1600')` }}>
           
-          <h1 className="mt-6 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl md:text-6xl lg:text-7xl">
-            Find your next home <br />
-            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent">
-              without the hidden fees.
+          <div className="text-center md:text-left max-w-2xl">
+            <span className="text-orange-400 text-xs font-bold tracking-widest uppercase bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20">
+              NOW TRUSTED
             </span>
-          </h1>
-          
-          <p className="mx-auto mt-6 max-w-2xl text-base text-slate-600 sm:text-lg md:text-xl">
-            Discover affordable furnished rooms, verified roommates, and secure lease agreements in prime city locations.
-          </p>
-
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-            <Link
-              href="/products"
-              className="group flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-xl shadow-blue-500/25 transition hover:bg-blue-700 sm:w-auto"
-            >
-              <span>Explore Products</span>
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-            <Link
-              href="/contact"
-              className="flex w-full items-center justify-center rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-xs transition hover:bg-slate-50 sm:w-auto"
-            >
-              Contact Sales
-            </Link>
+            <h1 className="text-3xl md:text-5xl font-extrabold text-white mt-4 leading-tight">
+              Perfect Firm For Selling Or Leasing Houses, Flats, And Villas
+            </h1>
           </div>
 
-          {/* Social Proof Subtext */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-slate-500 sm:gap-6">
-            <span className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-emerald-500" /> 100% ID-verified hosts & guests</span>
-            <span className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-emerald-500" /> Secure deposit protection</span>
+          {/* Search Box Card */}
+          <div className="bg-[#1f2937]/95 backdrop-blur-md p-6 rounded-2xl shadow-xl mt-8 border border-gray-700">
+            <div className="flex gap-6 mb-4 text-sm font-medium text-gray-300">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="property-type" defaultChecked className="text-orange-500 focus:ring-orange-500" /> For Lease
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="property-type" className="text-orange-500 focus:ring-orange-500" /> For Rent
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="property-type" className="text-orange-500 focus:ring-orange-500" /> For Sale
+              </label>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <input 
+                type="text" 
+                placeholder="Enter Keyword..." 
+                className="bg-[#111827] border border-gray-700 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-orange-500" 
+              />
+              <select className="bg-[#111827] border border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-400 focus:outline-none focus:border-orange-500">
+                <option>Property Type</option>
+              </select>
+              <div className="relative">
+                <input 
+                  type="text" 
+                  placeholder="Location" 
+                  className="w-full bg-[#111827] border border-gray-700 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-orange-500 pr-10" 
+                />
+                <MapPin className="w-4 h-4 text-gray-400 absolute right-3 top-3.5" />
+              </div>
+            </div>
+
+            <div className="mt-4 flex justify-end">
+              <button className="w-full md:w-auto bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg flex items-center justify-center gap-2 transition">
+                <Search className="w-4 h-4" /> Search Property
+              </button>
+            </div>
           </div>
+
+          <div className="flex flex-wrap gap-6 text-xs text-gray-300 mt-6 items-center">
+            <span>✔ Over 2K Properties.</span>
+            <span>✔ 46,759 people lease</span>
+            <span className="text-yellow-400 font-semibold">★ 4.8 Trusted by People</span>
+          </div>
+
+        </div>
+      </header>
+
+      {/* Search By Property Requirement */}
+      <section className="py-16 px-4 md:px-12 max-w-7xl mx-auto">
+        <div className="text-center mb-10">
+          <span className="text-orange-500 text-xs font-bold uppercase tracking-widest">Simple Listing</span>
+          <h2 className="text-2xl md:text-3xl font-bold text-white mt-1">Search By Property Requirement</h2>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+          {categories.map((cat, idx) => (
+            <div key={idx} className="bg-[#1f2937] border border-gray-800 hover:border-orange-500 p-6 rounded-2xl text-center transition cursor-pointer group">
+              <div className="w-12 h-12 bg-[#111827] rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+                {cat.icon}
+              </div>
+              <h3 className="font-bold text-white text-sm">{cat.name}</h3>
+              <p className="text-xs text-gray-400 mt-1">{cat.count}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* 2. METRICS BANNER */}
-      <section id="metrics" className="border-y border-slate-100 bg-slate-50/50 py-10 sm:py-12">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4 text-center">
-            <div>
-              <p className="text-2xl font-extrabold text-slate-900 sm:text-4xl">4,500+</p>
-              <p className="mt-1 text-xs text-slate-500 sm:text-sm">Happy Tenants Housed</p>
-            </div>
-            <div>
-              <p className="text-2xl font-extrabold text-slate-900 sm:text-4xl">50+</p>
-              <p className="mt-1 text-xs text-slate-500 sm:text-sm">Neighborhoods Covered</p>
-            </div>
-            <div>
-              <p className="text-2xl font-extrabold text-slate-900 sm:text-4xl">$0</p>
-              <p className="mt-1 text-xs text-slate-500 sm:text-sm">Brokerage Fees</p>
-            </div>
-            <div>
-              <p className="text-2xl font-extrabold text-slate-900 sm:text-4xl">4.9/5</p>
-              <p className="mt-1 text-xs text-slate-500 sm:text-sm">Average User Rating</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. FEATURES GRID */}
-      <section id="features" className="py-16 sm:py-24">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="text-center">
-            <h2 className="text-xs font-semibold uppercase tracking-widest text-blue-600">Why Choose RoomStay</h2>
-            <p className="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Designed for safe and stress-free room rentals
-            </p>
-          </div>
-          
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3">
-            
-            {/* Feature 1 */}
-            <div className="group rounded-2xl border border-slate-100 bg-white p-6 shadow-xs transition hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5 sm:p-8">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <Search className="h-6 w-6" />
-              </div>
-              <h3 className="mb-2 text-lg font-bold text-slate-900 sm:text-xl">Verified Listings</h3>
-              <p className="text-sm leading-relaxed text-slate-600">
-                Every room is physically inspected and verified to match listing photos, ensuring zero surprises when you move in.
-              </p>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="group rounded-2xl border border-slate-100 bg-white p-6 shadow-xs transition hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5 sm:p-8">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <ShieldCheck className="h-6 w-6" />
-              </div>
-              <h3 className="mb-2 text-lg font-bold text-slate-900 sm:text-xl">Secure Payments</h3>
-              <p className="text-sm leading-relaxed text-slate-600">
-                Pay rent and deposits securely through our escrow platform. Your funds are protected until you safely receive your room keys.
-              </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="group rounded-2xl border border-slate-100 bg-white p-6 shadow-xs transition hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5 sm:p-8">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <Users className="h-6 w-6" />
-              </div>
-              <h3 className="mb-2 text-lg font-bold text-slate-900 sm:text-xl">Compatible Roommates</h3>
-              <p className="text-sm leading-relaxed text-slate-600">
-                Use our built-in preference matching system to find roommates who match your lifestyle, study habits, and cleanliness expectations.
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* 4. CALL TO ACTION (CTA) */}
-      <section className="bg-slate-900 py-16 px-4 text-center text-white sm:py-20 sm:px-6">
-        <div className="mx-auto max-w-3xl">
-          <h2 className="text-2xl font-extrabold tracking-tight sm:text-4xl">
-            Ready to find your ideal room?
+      {/* Welcome Section */}
+      <section className="py-16 px-4 md:px-12 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="space-y-6">
+          <span className="text-orange-500 text-xs font-bold uppercase tracking-widest">Worldwide Properties</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight">
+            Welcome To Our Luxurious Properties, With All The Conveniences.
           </h2>
-          <p className="mt-3 text-sm text-slate-400 sm:text-base">
-            Sign up today to message verified landlords and schedule your room viewings instantly.
+          <p className="text-gray-400 text-sm leading-relaxed">
+            Mauris ac orci dignissim convallis sem et id orci. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris ac orci dignissim convallis sem et id orci.
           </p>
-          <div className="mt-8 flex justify-center">
-            <Link
-              href="/login"
-              className="rounded-xl bg-blue-600 px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-blue-500/25 transition hover:bg-blue-500"
-            >
-              Create Your Account
-            </Link>
+
+          <div className="grid grid-cols-2 gap-6 pt-4">
+            <div className="flex items-start gap-3">
+              <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><ShieldCheck className="w-5 h-5" /></div>
+              <div>
+                <h4 className="font-bold text-sm text-white">Answer Questions</h4>
+                <p className="text-xs text-gray-400 mt-1">Mauris ac orci dignissim convallis sem et id.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><UserCheck className="w-5 h-5" /></div>
+              <div>
+                <h4 className="font-bold text-sm text-white">Select a Quote</h4>
+                <p className="text-xs text-gray-400 mt-1">Mauris ac orci dignissim convallis sem et id.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><Key className="w-5 h-5" /></div>
+              <div>
+                <h4 className="font-bold text-sm text-white">Your Belongings</h4>
+                <p className="text-xs text-gray-400 mt-1">Mauris ac orci dignissim convallis sem et id.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><FileText className="w-5 h-5" /></div>
+              <div>
+                <h4 className="font-bold text-sm text-white">Personal Liability</h4>
+                <p className="text-xs text-gray-400 mt-1">Mauris ac orci dignissim convallis sem et id.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-6 pt-4">
+            <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-lg text-sm transition">
+              Explore Properties
+            </button>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white">
+                <PhoneCall className="w-4 h-4" />
+              </div>
+              <div>
+                <span className="text-xs text-gray-400 block">Call Us Anytime</span>
+                <span className="font-bold text-sm text-white">+01 123 456789</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative">
+          <div className="rounded-3xl overflow-hidden border border-gray-800 shadow-2xl">
+            <img 
+              src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=800" 
+              alt="Luxury home" 
+              className="w-full object-cover"
+            />
           </div>
         </div>
       </section>
+
+      {/* Comfort Living Solution */}
+      <section className="py-16 px-4 md:px-12 max-w-7xl mx-auto">
+        <div className="text-center mb-8">
+          <span className="text-orange-500 text-xs font-bold uppercase tracking-widest">Explore Villas</span>
+          <h2 className="text-2xl md:text-3xl font-bold text-white mt-1">Comfort Living Solution</h2>
+        </div>
+
+        {/* Filter Tabs */}
+        <div className="flex justify-center gap-2 mb-10 overflow-x-auto pb-2">
+          {['All Properties', 'For Sale', 'For Lease', 'For Rent'].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-5 py-2.5 rounded-full text-xs font-semibold transition ${
+                activeTab === tab 
+                  ? 'bg-orange-500 text-white' 
+                  : 'bg-[#1f2937] text-gray-400 hover:text-white border border-gray-800'
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+
+        {/* Property Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {properties.map((property, idx) => (
+            <div key={idx} className="bg-[#1f2937] border border-gray-800 rounded-2xl overflow-hidden group hover:border-orange-500/50 transition shadow-lg">
+              <div className="relative h-48 overflow-hidden">
+                <img 
+                  src={property.image} 
+                  alt={property.title} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition duration-300" 
+                />
+                <span className="absolute bottom-3 left-3 bg-[#111827]/90 text-orange-400 font-bold px-3 py-1 rounded-lg text-sm border border-gray-700">
+                  {property.price}
+                </span>
+              </div>
+              <div className="p-5">
+                <h3 className="font-bold text-white text-base mb-1">{property.title}</h3>
+                <p className="text-xs text-gray-400 flex items-center gap-1 mb-4">
+                  <MapPin className="w-3.5 h-3.5 text-orange-500 shrink-0" /> {property.location}
+                </p>
+                <div className="flex justify-between items-center text-xs text-gray-300 pt-3 border-t border-gray-800">
+                  <span className="flex items-center gap-1"><Square className="w-3.5 h-3.5 text-orange-500" /> {property.sqft}</span>
+                  <span className="flex items-center gap-1"><Bed className="w-3.5 h-3.5 text-orange-500" /> {property.beds} Beds</span>
+                  <span className="flex items-center gap-1"><Bath className="w-3.5 h-3.5 text-orange-500" /> {property.baths} Baths</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+     
 
     </div>
   );
