@@ -84,7 +84,7 @@ const Navbar = () => {
             <Link href="/" className="text-orange-500 transition hover:text-orange-400">
               Home
             </Link>
-            <Link href="/room/list" className="transition hover:text-orange-400">
+            <Link href="/getroom" className="transition hover:text-orange-400">
               Rooms
             </Link>
             <Link href="/contact" className="transition hover:text-orange-400">
@@ -126,7 +126,7 @@ const Navbar = () => {
             <Link href="/" onClick={() => setMobileMenuOpen(false)} className="text-orange-500 transition">
               Home
             </Link>
-            <Link href="/room/list" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-400">
+            <Link href="/getroom" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-400">
               Rooms
             </Link>
             <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-400">
