@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Building2, Home, Store, MapPin, Search, PhoneCall, 
   Bed, Bath, Square, ShieldCheck, UserCheck, 
@@ -9,53 +9,41 @@ import {
 
 export default function LandingPage() {
   const [activeTab, setActiveTab] = useState('All Properties');
+  const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch real data from the Express backend endpoint
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const res = await fetch('http://localhost:5000/api/v1/room/getroom');
+        const data = await res.json();
+        if (res.ok && data.success) {
+          setProperties(data.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch rooms:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProperties();
+  }, []);
 
   const categories = [
     { name: 'Apartment', count: '6 Properties', icon: <Building2 className="w-6 h-6 text-orange-500" /> },
     { name: 'Commercial', count: '4 Properties', icon: <Store className="w-6 h-6 text-orange-500" /> },
     { name: 'Sale Shop', count: '3 Properties', icon: <Home className="w-6 h-6 text-orange-500" /> },
-    { name: 'Town Ship', count: '5 Properties', icon: <Building2 className="w-6 h-6 text-orange-500" /> },
+    { name: 'Room', count: '5 Properties', icon: <Building2 className="w-6 h-6 text-orange-500" /> },
     { name: 'Villa', count: '8 Properties', icon: <Home className="w-6 h-6 text-orange-500" /> },
   ];
 
-  const properties = [
-    {
-      title: 'Oakwood Manor Estates',
-      location: '39947 Washington Street, Id 83648',
-      price: '$148,000',
-      beds: 3,
-      baths: 2,
-      sqft: '2,415 Sq Ft',
-      image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=600',
-    },
-    {
-      title: 'Willowbrook Gres Estate',
-      location: '71830 Hana St, Wailea, Indonesia, ID 83686',
-      price: '$148,000',
-      beds: 3,
-      baths: 2,
-      sqft: '2,408 Sq Ft',
-      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=600',
-    },
-    {
-      title: 'Timberland Interior Legacy',
-      location: '44691 Barney Gateway, Japan, Id 83541',
-      price: '$128,000',
-      beds: 2,
-      baths: 2,
-      sqft: '2,805 Sq Ft',
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=600',
-    },
-    {
-      title: 'Cedar Ridge Residences',
-      location: '71830 Lok St, Wailea, Japan, ID 83569',
-      price: '$128,000',
-      beds: 2,
-      baths: 2,
-      sqft: '2,408 Sq Ft',
-      image: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&q=80&w=600',
-    },
-  ];
+  // Filter properties based on the active tab status
+  const filteredProperties = properties.filter((property: any) => {
+    if (activeTab === 'All Properties') return true;
+    return property.status === activeTab;
+  });
 
   return (
     <div className="min-h-screen bg-[#111827] text-gray-100 font-sans">
@@ -70,7 +58,7 @@ export default function LandingPage() {
               NOW TRUSTED
             </span>
             <h1 className="text-3xl md:text-5xl font-extrabold text-white mt-4 leading-tight">
-              Perfect Firm For Selling Or Leasing Houses, Flats, And Villas
+              Perfect Firm For Selling Or Leasing Houses, Flats, And Rooms
             </h1>
           </div>
 
@@ -145,61 +133,61 @@ export default function LandingPage() {
 
       {/* Welcome Section */}
       <section className="py-16 px-4 md:px-12 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div className="space-y-6">
-          <span className="text-orange-500 text-xs font-bold uppercase tracking-widest">Worldwide Properties</span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight">
-            Welcome To Our Luxurious Properties, With All The Conveniences.
-          </h2>
-          <p className="text-gray-400 text-sm leading-relaxed">
-            Mauris ac orci dignissim convallis sem et id orci. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris ac orci dignissim convallis sem et id orci.
-          </p>
+       <div className="space-y-6">
+  <span className="text-orange-500 text-xs font-bold uppercase tracking-widest">Worldwide Properties</span>
+  <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight">
+    Welcome To Our Luxurious Properties, With All The Conveniences.
+  </h2>
+  <p className="text-gray-400 text-sm leading-relaxed">
+    We provide world-class real estate services, helping you buy, sell, and lease luxury homes, apartments, and commercial spaces tailored to your lifestyle.
+  </p>
 
-          <div className="grid grid-cols-2 gap-6 pt-4">
-            <div className="flex items-start gap-3">
-              <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><ShieldCheck className="w-5 h-5" /></div>
-              <div>
-                <h4 className="font-bold text-sm text-white">Answer Questions</h4>
-                <p className="text-xs text-gray-400 mt-1">Mauris ac orci dignissim convallis sem et id.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><UserCheck className="w-5 h-5" /></div>
-              <div>
-                <h4 className="font-bold text-sm text-white">Select a Quote</h4>
-                <p className="text-xs text-gray-400 mt-1">Mauris ac orci dignissim convallis sem et id.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><Key className="w-5 h-5" /></div>
-              <div>
-                <h4 className="font-bold text-sm text-white">Your Belongings</h4>
-                <p className="text-xs text-gray-400 mt-1">Mauris ac orci dignissim convallis sem et id.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><FileText className="w-5 h-5" /></div>
-              <div>
-                <h4 className="font-bold text-sm text-white">Personal Liability</h4>
-                <p className="text-xs text-gray-400 mt-1">Mauris ac orci dignissim convallis sem et id.</p>
-              </div>
-            </div>
-          </div>
+  <div className="grid grid-cols-2 gap-6 pt-4">
+    <div className="flex items-start gap-3">
+      <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><ShieldCheck className="w-5 h-5" /></div>
+      <div>
+        <h4 className="font-bold text-sm text-white">Verified Listings</h4>
+        <p className="text-xs text-gray-400 mt-1">Every property is thoroughly vetted for authenticity.</p>
+      </div>
+    </div>
+    <div className="flex items-start gap-3">
+      <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><UserCheck className="w-5 h-5" /></div>
+      <div>
+        <h4 className="font-bold text-sm text-white">Expert Agents</h4>
+        <p className="text-xs text-gray-400 mt-1">Professional guidance at every step of your journey.</p>
+      </div>
+    </div>
+    <div className="flex items-start gap-3">
+      <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><Key className="w-5 h-5" /></div>
+      <div>
+        <h4 className="font-bold text-sm text-white">Instant Moving</h4>
+        <p className="text-xs text-gray-400 mt-1">Quick paperwork and fast key handover process.</p>
+      </div>
+    </div>
+    <div className="flex items-start gap-3">
+      <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><FileText className="w-5 h-5" /></div>
+      <div>
+        <h4 className="font-bold text-sm text-white">Transparent Deals</h4>
+        <p className="text-xs text-gray-400 mt-1">Clear contracts with no hidden fees or charges.</p>
+      </div>
+    </div>
+  </div>
 
-          <div className="flex items-center gap-6 pt-4">
-            <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-lg text-sm transition">
-              Explore Properties
-            </button>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white">
-                <PhoneCall className="w-4 h-4" />
-              </div>
-              <div>
-                <span className="text-xs text-gray-400 block">Call Us Anytime</span>
-                <span className="font-bold text-sm text-white">+01 123 456789</span>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div className="flex items-center gap-6 pt-4">
+    <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-lg text-sm transition">
+      Explore Properties
+    </button>
+    <div className="flex items-center gap-3">
+      <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white">
+        <PhoneCall className="w-4 h-4" />
+      </div>
+      <div>
+        <span className="text-xs text-gray-400 block">Call Us Anytime</span>
+        <span className="font-bold text-sm text-white">+977 9821005569</span>
+      </div>
+    </div>
+  </div>
+</div>
 
         <div className="relative">
           <div className="rounded-3xl overflow-hidden border border-gray-800 shadow-2xl">
@@ -236,37 +224,41 @@ export default function LandingPage() {
           ))}
         </div>
 
-        {/* Property Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {properties.map((property, idx) => (
-            <div key={idx} className="bg-[#1f2937] border border-gray-800 rounded-2xl overflow-hidden group hover:border-orange-500/50 transition shadow-lg">
-              <div className="relative h-48 overflow-hidden">
-                <img 
-                  src={property.image} 
-                  alt={property.title} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition duration-300" 
-                />
-                <span className="absolute bottom-3 left-3 bg-[#111827]/90 text-orange-400 font-bold px-3 py-1 rounded-lg text-sm border border-gray-700">
-                  {property.price}
-                </span>
-              </div>
-              <div className="p-5">
-                <h3 className="font-bold text-white text-base mb-1">{property.title}</h3>
-                <p className="text-xs text-gray-400 flex items-center gap-1 mb-4">
-                  <MapPin className="w-3.5 h-3.5 text-orange-500 shrink-0" /> {property.location}
-                </p>
-                <div className="flex justify-between items-center text-xs text-gray-300 pt-3 border-t border-gray-800">
-                  <span className="flex items-center gap-1"><Square className="w-3.5 h-3.5 text-orange-500" /> {property.sqft}</span>
-                  <span className="flex items-center gap-1"><Bed className="w-3.5 h-3.5 text-orange-500" /> {property.beds} Beds</span>
-                  <span className="flex items-center gap-1"><Bath className="w-3.5 h-3.5 text-orange-500" /> {property.baths} Baths</span>
+        {/* Property Grid with Real Backend Data */}
+        {loading ? (
+          <div className="text-center py-12 text-gray-400">Loading properties...</div>
+        ) : filteredProperties.length === 0 ? (
+          <div className="text-center py-12 text-gray-400">No properties available.</div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {filteredProperties.map((property: any, idx) => (
+              <div key={property._id || idx} className="bg-[#1f2937] border border-gray-800 rounded-2xl overflow-hidden group hover:border-orange-500/50 transition shadow-lg">
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={property.images?.[0] || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=600'} 
+                    alt={property.title} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition duration-300" 
+                  />
+                  <span className="absolute bottom-3 left-3 bg-[#111827]/90 text-orange-400 font-bold px-3 py-1 rounded-lg text-sm border border-gray-700">
+                    ${property.price}
+                  </span>
+                </div>
+                <div className="p-5">
+                  <h3 className="font-bold text-white text-base mb-1">{property.title}</h3>
+                  <p className="text-xs text-gray-400 flex items-center gap-1 mb-4">
+                    <MapPin className="w-3.5 h-3.5 text-orange-500 shrink-0" /> {property.location}
+                  </p>
+                  <div className="flex justify-between items-center text-xs text-gray-300 pt-3 border-t border-gray-800">
+                    <span className="flex items-center gap-1"><Square className="w-3.5 h-3.5 text-orange-500" /> {property.sqft} Sq Ft</span>
+                    <span className="flex items-center gap-1"><Bed className="w-3.5 h-3.5 text-orange-500" /> {property.beds} Beds</span>
+                    <span className="flex items-center gap-1"><Bath className="w-3.5 h-3.5 text-orange-500" /> {property.baths} Baths</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
-
-     
 
     </div>
   );

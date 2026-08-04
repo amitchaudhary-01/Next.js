@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Home as HomeIcon, MapPin, Phone, Menu, X } from 'lucide-react';
 
 // Custom SVG Icons for Social Media
@@ -35,6 +35,16 @@ const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Prevent server/client render mismatches during hydration
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <div className="sticky top-0 z-50 w-full">
@@ -74,7 +84,7 @@ const Navbar = () => {
             <Link href="/" className="text-orange-500 transition hover:text-orange-400">
               Home
             </Link>
-            <Link href="/room" className="transition hover:text-orange-400">
+            <Link href="/room/list" className="transition hover:text-orange-400">
               Rooms
             </Link>
             <Link href="/contact" className="transition hover:text-orange-400">
@@ -116,7 +126,7 @@ const Navbar = () => {
             <Link href="/" onClick={() => setMobileMenuOpen(false)} className="text-orange-500 transition">
               Home
             </Link>
-            <Link href="/room" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-400">
+            <Link href="/room/list" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-400">
               Rooms
             </Link>
             <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-400">

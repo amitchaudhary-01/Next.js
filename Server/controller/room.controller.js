@@ -36,3 +36,23 @@ export const ListRoom = async(req,res)=>{
         
     }
 }
+
+
+export const getRoom = async (req, res) => {
+    try {
+        const data = await Room.find();
+        
+        return res.status(200).json({
+            success: true,
+            count: data.length,
+            data
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: "Server Error",
+            error: error.message
+        });
+    }
+};
