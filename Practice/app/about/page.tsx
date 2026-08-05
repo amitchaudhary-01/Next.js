@@ -1,28 +1,9 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
 import AboutPage from "@/component/about-page";
 
-// Display face: characterful serif, used sparingly for the headline + waypoint dates.
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-display",
-});
 
-// Body face: quiet, highly readable workhorse.
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-body",
-});
 
-// Utility face: for the coordinate-style waypoint labels ("WP·01").
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-mono",
-});
+
 
 // This is a Server Component (no "use client"), so it renders on the
 // server for every request — no extra config needed for SSR under the
@@ -38,9 +19,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main
-      className={`${fraunces.variable} ${inter.variable} ${plexMono.variable} font-[family-name:var(--font-body)]`}
-    >
+    <main>
       <AboutPage />
     </main>
   );

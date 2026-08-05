@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { Home, MapPin, DollarSign, Image as ImageIcon, Bed, Bath, Maximize, FileText, Loader2, Sparkles } from "lucide-react";
 
 export default function CreateRoomPage() {
   const [formData, setFormData] = useState({
     title: "",
     category: "",
-    images: "", // Storing as comma-separated text or single string for input convenience
+    images: "",
     location: "",
     price: "",
     description: "",
@@ -32,14 +33,14 @@ export default function CreateRoomPage() {
           beds: Number(formData.beds),
           baths: Number(formData.baths),
           sqft: Number(formData.sqft),
-          images: [formData.images], // Wrapping string into an array to match backend schema type [String]
+          images: [formData.images],
         }),
       });
 
       const data = await res.json();
 
       if (res.ok) {
-        toast("Room published successfully!");
+        toast.success("Room published successfully!");
         setFormData({
           title: "",
           category: "",
@@ -53,109 +54,234 @@ export default function CreateRoomPage() {
           status: "For Rent",
         });
       } else {
-        toast(data.message || "Error publishing room.");
+        toast.error(data.message || "Error publishing room.");
       }
     } catch (error) {
       console.error("Network error:", error);
-      toast("Failed to connect to the server.");
+      toast.error("Failed to connect to the server.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="mx-auto max-w-xl p-6">
-      <h1 className="mb-6 text-2xl font-bold">List a New Room</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          placeholder="Room Title (e.g., Cozy Studio Apartment)"
-          value={formData.title}
-          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-          required
-          className="w-full rounded-lg border p-3 text-sm"
-        />
-        <input
-          type="text"
-          placeholder="Category (e.g., Apartment, Villa)"
-          value={formData.category}
-          onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-          required
-          className="w-full rounded-lg border p-3 text-sm"
-        />
-        <input
-          type="text"
-          placeholder="Location (e.g., Butwal, Nepal)"
-          value={formData.location}
-          onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-          required
-          className="w-full rounded-lg border p-3 text-sm"
-        />
-        <input
-          type="number"
-          placeholder="Price"
-          value={formData.price}
-          onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-          required
-          className="w-full rounded-lg border p-3 text-sm"
-        />
-        <input
-          type="text"
-          placeholder="Image URL"
-          value={formData.images}
-          onChange={(e) => setFormData({ ...formData, images: e.target.value })}
-          required
-          className="w-full rounded-lg border p-3 text-sm"
-        />
-        <div className="grid grid-cols-3 gap-2">
-          <input
-            type="number"
-            placeholder="Beds"
-            value={formData.beds}
-            onChange={(e) => setFormData({ ...formData, beds: e.target.value })}
-            required
-            className="w-full rounded-lg border p-3 text-sm"
-          />
-          <input
-            type="number"
-            placeholder="Baths"
-            value={formData.baths}
-            onChange={(e) => setFormData({ ...formData, baths: e.target.value })}
-            required
-            className="w-full rounded-lg border p-3 text-sm"
-          />
-          <input
-            type="number"
-            placeholder="Sqft"
-            value={formData.sqft}
-            onChange={(e) => setFormData({ ...formData, sqft: e.target.value })}
-            required
-            className="w-full rounded-lg border p-3 text-sm"
-          />
+    <div className="min-h-screen bg-slate-50/50 py-20 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-3xl">
+        
+        {/* Header Title Area */}
+        <div className="text-center mb-10" data-aos="fade-down">
+          <p className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.25em] text-[#C9A227] font-semibold">
+            Property Manager
+          </p>
+          <h1 className="mt-2 font-[family-name:var(--font-display)] text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">
+            List a New Property
+          </h1>
+          <p className="mt-2 text-sm text-gray-600">
+            Fill out the information below to publish your room, apartment, or villa to seekers.
+          </p>
         </div>
-        <select
-          value={formData.status}
-          onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-          className="w-full rounded-lg border p-3 text-sm bg-white"
-        >
-          <option value="For Rent">For Rent</option>
-          <option value="For Sale">For Sale</option>
-          <option value="For Lease">For Lease</option>
-        </select>
-        <textarea
-          placeholder="Description"
-          value={formData.description}
-          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-          className="w-full rounded-lg border p-3 text-sm h-28"
-        />
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full rounded-lg bg-blue-600 py-3 font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
-        >
-          {loading ? "Publishing..." : "Publish Room"}
-        </button>
-      </form>
+
+        {/* Form Container Card */}
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 sm:p-12 relative" data-aos="fade-up">
+          <div className="absolute top-0 right-10 transform -translate-y-1/2 bg-[#12202B] text-[#C9A227] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider flex items-center gap-1.5 shadow-md">
+            <Sparkles className="w-3.5 h-3.5" /> Verified Listing
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            
+            {/* Title & Category Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
+                  Room Title <span className="text-[#C9A227]">*</span>
+                </label>
+                <div className="relative">
+                  <span className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                    <Home className="w-4 h-4" />
+                  </span>
+                  <input
+                    type="text"
+                    placeholder="Cozy Studio Apartment"
+                    value={formData.title}
+                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                    required
+                    className="w-full rounded-xl border border-gray-200 bg-gray-50/50 pl-11 pr-4 py-3.5 text-gray-900 text-sm outline-none focus:border-[#C9A227] focus:bg-white focus:ring-2 focus:ring-[#C9A227]/20 transition-all"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
+                  Category <span className="text-[#C9A227]">*</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Apartment, Villa, Studio..."
+                  value={formData.category}
+                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                  required
+                  className="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-4 py-3.5 text-gray-900 text-sm outline-none focus:border-[#C9A227] focus:bg-white focus:ring-2 focus:ring-[#C9A227]/20 transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Location & Price Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
+                  Location <span className="text-[#C9A227]">*</span>
+                </label>
+                <div className="relative">
+                  <span className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                    <MapPin className="w-4 h-4" />
+                  </span>
+                  <input
+                    type="text"
+                    placeholder="Butwal, Nepal"
+                    value={formData.location}
+                    onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                    required
+                    className="w-full rounded-xl border border-gray-200 bg-gray-50/50 pl-11 pr-4 py-3.5 text-gray-900 text-sm outline-none focus:border-[#C9A227] focus:bg-white focus:ring-2 focus:ring-[#C9A227]/20 transition-all"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
+                  Price ($ / Month or Total) <span className="text-[#C9A227]">*</span>
+                </label>
+                <div className="relative">
+                  <span className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                    <DollarSign className="w-4 h-4" />
+                  </span>
+                  <input
+                    type="number"
+                    placeholder="500"
+                    value={formData.price}
+                    onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                    required
+                    className="w-full rounded-xl border border-gray-200 bg-gray-50/50 pl-11 pr-4 py-3.5 text-gray-900 text-sm outline-none focus:border-[#C9A227] focus:bg-white focus:ring-2 focus:ring-[#C9A227]/20 transition-all"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Image URL & Status Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div className="sm:col-span-2">
+                <label className="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
+                  Image URL <span className="text-[#C9A227]">*</span>
+                </label>
+                <div className="relative">
+                  <span className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                    <ImageIcon className="w-4 h-4" />
+                  </span>
+                  <input
+                    type="text"
+                    placeholder="https://images.unsplash.com/..."
+                    value={formData.images}
+                    onChange={(e) => setFormData({ ...formData, images: e.target.value })}
+                    required
+                    className="w-full rounded-xl border border-gray-200 bg-gray-50/50 pl-11 pr-4 py-3.5 text-gray-900 text-sm outline-none focus:border-[#C9A227] focus:bg-white focus:ring-2 focus:ring-[#C9A227]/20 transition-all"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
+                  Listing Status <span className="text-[#C9A227]">*</span>
+                </label>
+                <select
+                  value={formData.status}
+                  onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                  className="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-4 py-3.5 text-gray-900 text-sm outline-none focus:border-[#C9A227] focus:bg-white focus:ring-2 focus:ring-[#C9A227]/20 transition-all"
+                >
+                  <option value="For Rent">For Rent</option>
+                  <option value="For Sale">For Sale</option>
+                  <option value="For Lease">For Lease</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Specs Grid: Beds, Baths, Sqft */}
+            <div className="grid grid-cols-3 gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2 flex items-center gap-1">
+                  <Bed className="w-3.5 h-3.5 text-[#C9A227]" /> Beds
+                </label>
+                <input
+                  type="number"
+                  placeholder="2"
+                  value={formData.beds}
+                  onChange={(e) => setFormData({ ...formData, beds: e.target.value })}
+                  required
+                  className="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-4 py-3.5 text-gray-900 text-sm outline-none focus:border-[#C9A227] focus:bg-white focus:ring-2 focus:ring-[#C9A227]/20 transition-all"
+                />
+              </div>
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2 flex items-center gap-1">
+                  <Bath className="w-3.5 h-3.5 text-[#C9A227]" /> Baths
+                </label>
+                <input
+                  type="number"
+                  placeholder="1"
+                  value={formData.baths}
+                  onChange={(e) => setFormData({ ...formData, baths: e.target.value })}
+                  required
+                  className="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-4 py-3.5 text-gray-900 text-sm outline-none focus:border-[#C9A227] focus:bg-white focus:ring-2 focus:ring-[#C9A227]/20 transition-all"
+                />
+              </div>
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2 flex items-center gap-1">
+                  <Maximize className="w-3.5 h-3.5 text-[#C9A227]" /> Sqft
+                </label>
+                <input
+                  type="number"
+                  placeholder="850"
+                  value={formData.sqft}
+                  onChange={(e) => setFormData({ ...formData, sqft: e.target.value })}
+                  required
+                  className="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-4 py-3.5 text-gray-900 text-sm outline-none focus:border-[#C9A227] focus:bg-white focus:ring-2 focus:ring-[#C9A227]/20 transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Description Area */}
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2 flex items-center gap-1">
+                <FileText className="w-3.5 h-3.5 text-[#C9A227]" /> Description
+              </label>
+              <textarea
+                placeholder="Highlight key features, amenities, neighborhood details..."
+                value={formData.description}
+                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                rows={4}
+                className="w-full resize-none rounded-xl border border-gray-200 bg-gray-50/50 px-4 py-3.5 text-gray-900 text-sm outline-none focus:border-[#C9A227] focus:bg-white focus:ring-2 focus:ring-[#C9A227]/20 transition-all"
+              />
+            </div>
+
+            {/* Action Submit Button */}
+            <div className="pt-4">
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#C9A227] py-4 font-semibold text-[#12202B] shadow-md hover:bg-[#e0b62c] focus:outline-none focus:ring-2 focus:ring-[#C9A227] focus:ring-offset-2 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Publishing Room...</span>
+                  </>
+                ) : (
+                  <span>Publish Room Listing</span>
+                )}
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
     </div>
   );
 }
