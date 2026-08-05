@@ -26,6 +26,7 @@ export const ListRoom = async(req,res)=>{
         return res.status(200).json({
             message:"Room Listed Successfully",
             data:room
+            
         })
 
     } catch (error) {
