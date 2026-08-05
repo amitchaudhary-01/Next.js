@@ -23,7 +23,7 @@ export default function CreateRoomPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/v1/room/getroom", {
+      const res = await fetch("http://localhost:5000/api/v1/room/list", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

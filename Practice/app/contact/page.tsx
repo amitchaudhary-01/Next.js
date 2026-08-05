@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 // import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
-import ContactPage from "@/component/contact-page";
+import ContactSection from "@/component/contact-form";
 
 // Same font trio as the About page, for a consistent type system.
 // If you have a root app/layout.tsx, consider moving this font setup
@@ -32,10 +32,11 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main
-    //   className={`${fraunces.variable} ${inter.variable} ${plexMono.variable} font-[family-name:var(--font-body)]`}
-    >
-      <ContactPage />
+<div>
+    <h1 className="text-3xl flex justify-center mt-10 text-orange-400 font-bold">Contact Us</h1>
+    <main>
+      <ContactSection />
     </main>
+    </div>
   );
 }

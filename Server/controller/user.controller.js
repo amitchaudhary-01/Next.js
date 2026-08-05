@@ -47,3 +47,71 @@ const Create = async (req, res) => {
 }
 
 export default Create;
+
+
+import jwt from 'jsonwebtoken';
+
+export const Login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Check if email and password are provided
+        if (!email || !password) {
+            return res.status(400).json({
+                success: false,
+                message: "Please provide both email and password."
+            });
+        }
+
+        // Find the user in the database
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(401).json({
+                success: false,
+                message: "Invalid email or password."
+            });
+        }
+
+        // Compare passwords
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(401).json({
+                success: false,
+                message: "Invalid email or password."
+            });
+        }
+
+        // Generate a JWT token (Fixed jwt.login to jwt.sign)
+        const token = jwt.sign(
+            { id: user._id, email: user.email },
+            process.env.JWT_SECRET || 'your_secret_key',
+            { expiresIn: '1d' }
+        );
+
+        res.cookie("token", token, {
+            httpOnly: true,
+            sameSite: "strict",
+            secure: process.env.NODE_ENV === "production",
+            maxAge: 24 * 60 * 60 * 1000, 
+        });
+
+        // Send success response with token
+        return res.status(200).json({
+            success: true,
+            message: "Login successfully",
+            token,
+            data: {
+                id: user._id,
+                email: user.email,
+                name: user.name
+            }
+        });
+
+    } catch (error) {
+        console.error("Login error:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error."
+        });
+    }
+};

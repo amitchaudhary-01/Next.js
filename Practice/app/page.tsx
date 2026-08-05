@@ -6,13 +6,15 @@ import {
   Bed, Bath, Square, ShieldCheck, UserCheck, 
   Key, FileText
 } from 'lucide-react';
+import { useRouter } from 'next/navigation'; // Import router for navigation
+import PropertyCategories from '@/component/PropertyCategories';
 
 export default function LandingPage() {
   const [activeTab, setActiveTab] = useState('All Properties');
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter(); // Initialize router
 
-  // Fetch real data from the Express backend endpoint
   useEffect(() => {
     const fetchProperties = async () => {
       try {
@@ -39,6 +41,10 @@ export default function LandingPage() {
     { name: 'Villa', count: '8 Properties', icon: <Home className="w-6 h-6 text-orange-500" /> },
   ];
 
+  const handleCategoryClick = (categoryName: string) => {
+    console.log("Selected Category:", categoryName);
+  };
+
   const filteredProperties = properties.filter((property: any) => {
     if (activeTab === 'All Properties') return true;
     return property.status === activeTab;
@@ -54,7 +60,6 @@ export default function LandingPage() {
           className="max-w-7xl mx-auto rounded-3xl overflow-hidden relative bg-cover bg-center min-h-[500px] flex flex-col justify-between p-6 md:p-12 shadow-2xl"
           style={{ backgroundImage: `linear-gradient(rgba(17, 24, 39, 0.6), rgba(17, 24, 39, 0.7)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1600')` }}
         >
-          
           <div data-aos="fade-right" data-aos-delay="200" className="text-center md:text-left max-w-2xl">
             <span className="text-orange-400 text-xs font-bold tracking-widest uppercase bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20">
               NOW TRUSTED
@@ -108,34 +113,11 @@ export default function LandingPage() {
             <span>✔ 46,759 people lease</span>
             <span className="text-yellow-400 font-semibold">★ 4.8 Trusted by People</span>
           </div>
-
         </div>
       </header>
 
-      {/* Search By Property Requirement */}
-      <section className="py-16 px-4 md:px-12 max-w-7xl mx-auto">
-        <div data-aos="fade-up" className="text-center mb-10">
-          <span className="text-orange-500 text-xs font-bold uppercase tracking-widest">Simple Listing</span>
-          <h2 className="text-2xl md:text-3xl font-bold text-white mt-1">Search By Property Requirement</h2>
-        </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-          {categories.map((cat, idx) => (
-            <div 
-              key={idx} 
-              data-aos="zoom-in"
-              data-aos-delay={idx * 100}
-              className="bg-[#1f2937] border border-gray-800 hover:border-orange-500 p-6 rounded-2xl text-center transition cursor-pointer group"
-            >
-              <div className="w-12 h-12 bg-[#111827] rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
-                {cat.icon}
-              </div>
-              <h3 className="font-bold text-white text-sm">{cat.name}</h3>
-              <p className="text-xs text-gray-400 mt-1">{cat.count}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Property Categories Component */}
+      <PropertyCategories categories={categories} onCategoryClick={handleCategoryClick} />
 
       {/* Welcome Section */}
       <section className="py-16 px-4 md:px-12 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -242,7 +224,9 @@ export default function LandingPage() {
                 key={property._id || idx} 
                 data-aos="fade-up"
                 data-aos-delay={(idx % 4) * 100}
-                className="bg-[#1f2937] border border-gray-800 rounded-2xl overflow-hidden group hover:border-orange-500/50 transition shadow-lg"
+                // Added onClick handler to safely route to a public details page instead of forcing login
+                onClick={() => router.push(`/rooms/${property._id}`)}
+                className="bg-[#1f2937] border border-gray-800 rounded-2xl overflow-hidden group hover:border-orange-500/50 transition shadow-lg cursor-pointer"
               >
                 <div className="relative h-48 overflow-hidden">
                   <img 

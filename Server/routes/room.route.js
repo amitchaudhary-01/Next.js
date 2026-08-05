@@ -1,10 +1,13 @@
-import express, { Router } from 'express'
-import { getRoom, ListRoom } from '../controller/room.controller.js'
+import express, { Router } from 'express';
+import { getRoom, ListRoom } from '../controller/room.controller.js';
+import { verifyToken } from '../middleware/authMiddleware.js';
 
-const router = express.Router()
+const router = express.Router();
 
-router.post("/list",ListRoom)
+// Protected route: Only authenticated users can list/create a room
+router.post("/list", verifyToken, ListRoom);
 
-router.get("/getroom",getRoom)
+// Public route: Anyone can view the rooms
+router.get("/getroom", getRoom);
 
-export default router
+export default router;

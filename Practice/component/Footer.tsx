@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="md:col-span-2 space-y-4">
           <h3 className="text-2xl font-black text-white">Veedoo</h3>
           <p className="text-xs text-gray-400 max-w-sm leading-relaxed">
-            Mauris ac orci dignissim convallis sem et id orci. Class aptent taciti sociosqu ad litora torquent per conubia nostra.
+            Veedoo is an 
           </p>
           <div className="flex space-x-3 pt-2">
             <div className="w-8 h-8 rounded-full bg-[#1f2937] flex items-center justify-center text-gray-300 hover:bg-orange-500 hover:text-white cursor-pointer transition">

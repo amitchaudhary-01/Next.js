@@ -1,23 +1,61 @@
-"use client";
+'use client';
 
 import React, { useState } from "react";
 import { Eye, EyeOff, Lock, Mail, ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation"; // Optional: for routing after login
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // Simulate authentication logic
-    setTimeout(() => {
-      console.log("Logging in with:", { email, password });
+    setErrorMessage("");
+
+    try {
+      const response = await fetch('http://localhost:5000/api/v1/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        console.log("Login successful:", data);
+        // Optional: Save token to localStorage or cookies
+        // localStorage.setItem('token', data.token);
+        
+        // Redirect to dashboard or home page
+        router.push('/');
+      } else {
+        setErrorMessage(data.message || "Invalid email or password.");
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      setErrorMessage("Something went wrong. Please check your connection.");
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setPassword(e.target.value);
+  };
+
+  const toggleShowPassword = (): void => {
+    setShowPassword((prev) => !prev);
   };
 
   return (
@@ -37,6 +75,13 @@ export default function LoginPage() {
           </p>
         </div>
 
+        {/* Error Message Display */}
+        {errorMessage && (
+          <div className="rounded-lg bg-red-50 p-3 text-center text-xs font-medium text-red-600 border border-red-200">
+            {errorMessage}
+          </div>
+        )}
+
         {/* Form Section */}
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           <div className="space-y-4">
@@ -53,7 +98,7 @@ export default function LoginPage() {
                 <input
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={handleEmailChange}
                   required
                   className="w-full rounded-xl border border-gray-200 bg-gray-50/50 py-3 pl-10 pr-4 text-sm text-gray-950 placeholder-gray-400 transition-all focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-500/10"
                   placeholder="name@example.com"
@@ -81,14 +126,14 @@ export default function LoginPage() {
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={handlePasswordChange}
                   required
                   className="w-full rounded-xl border border-gray-200 bg-gray-50/50 py-3 pl-10 pr-12 text-sm text-gray-950 placeholder-gray-400 transition-all focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-500/10"
                   placeholder="••••••••"
                 />
                 <button
                   type="button"
-                  onClick={() => setShowPassword(!showPassword)}
+                  onClick={toggleShowPassword}
                   className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 transition-colors"
                 >
                   {showPassword ? (
