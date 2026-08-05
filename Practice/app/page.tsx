@@ -39,21 +39,23 @@ export default function LandingPage() {
     { name: 'Villa', count: '8 Properties', icon: <Home className="w-6 h-6 text-orange-500" /> },
   ];
 
-  // Filter properties based on the active tab status
   const filteredProperties = properties.filter((property: any) => {
     if (activeTab === 'All Properties') return true;
     return property.status === activeTab;
   });
 
   return (
-    <div className="min-h-screen bg-[#111827] text-gray-100 font-sans">
+    <div className="min-h-screen bg-[#111827] text-gray-100 font-sans overflow-x-hidden">
       
       {/* Hero Section */}
       <header className="relative bg-[#111827] px-4 md:px-12 pt-8 pb-20">
-        <div className="max-w-7xl mx-auto rounded-3xl overflow-hidden relative bg-cover bg-center min-h-[500px] flex flex-col justify-between p-6 md:p-12 shadow-2xl"
-             style={{ backgroundImage: `linear-gradient(rgba(17, 24, 39, 0.6), rgba(17, 24, 39, 0.7)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1600')` }}>
+        <div 
+          data-aos="fade-down"
+          className="max-w-7xl mx-auto rounded-3xl overflow-hidden relative bg-cover bg-center min-h-[500px] flex flex-col justify-between p-6 md:p-12 shadow-2xl"
+          style={{ backgroundImage: `linear-gradient(rgba(17, 24, 39, 0.6), rgba(17, 24, 39, 0.7)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1600')` }}
+        >
           
-          <div className="text-center md:text-left max-w-2xl">
+          <div data-aos="fade-right" data-aos-delay="200" className="text-center md:text-left max-w-2xl">
             <span className="text-orange-400 text-xs font-bold tracking-widest uppercase bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20">
               NOW TRUSTED
             </span>
@@ -62,8 +64,7 @@ export default function LandingPage() {
             </h1>
           </div>
 
-          {/* Search Box Card */}
-          <div className="bg-[#1f2937]/95 backdrop-blur-md p-6 rounded-2xl shadow-xl mt-8 border border-gray-700">
+          <div data-aos="fade-up" data-aos-delay="400" className="bg-[#1f2937]/95 backdrop-blur-md p-6 rounded-2xl shadow-xl mt-8 border border-gray-700">
             <div className="flex gap-6 mb-4 text-sm font-medium text-gray-300">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="radio" name="property-type" defaultChecked className="text-orange-500 focus:ring-orange-500" /> For Lease
@@ -102,7 +103,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-6 text-xs text-gray-300 mt-6 items-center">
+          <div data-aos="fade-in" data-aos-delay="600" className="flex flex-wrap gap-6 text-xs text-gray-300 mt-6 items-center">
             <span>✔ Over 2K Properties.</span>
             <span>✔ 46,759 people lease</span>
             <span className="text-yellow-400 font-semibold">★ 4.8 Trusted by People</span>
@@ -113,14 +114,19 @@ export default function LandingPage() {
 
       {/* Search By Property Requirement */}
       <section className="py-16 px-4 md:px-12 max-w-7xl mx-auto">
-        <div className="text-center mb-10">
+        <div data-aos="fade-up" className="text-center mb-10">
           <span className="text-orange-500 text-xs font-bold uppercase tracking-widest">Simple Listing</span>
           <h2 className="text-2xl md:text-3xl font-bold text-white mt-1">Search By Property Requirement</h2>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
           {categories.map((cat, idx) => (
-            <div key={idx} className="bg-[#1f2937] border border-gray-800 hover:border-orange-500 p-6 rounded-2xl text-center transition cursor-pointer group">
+            <div 
+              key={idx} 
+              data-aos="zoom-in"
+              data-aos-delay={idx * 100}
+              className="bg-[#1f2937] border border-gray-800 hover:border-orange-500 p-6 rounded-2xl text-center transition cursor-pointer group"
+            >
               <div className="w-12 h-12 bg-[#111827] rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
                 {cat.icon}
               </div>
@@ -133,63 +139,63 @@ export default function LandingPage() {
 
       {/* Welcome Section */}
       <section className="py-16 px-4 md:px-12 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-       <div className="space-y-6">
-  <span className="text-orange-500 text-xs font-bold uppercase tracking-widest">Worldwide Properties</span>
-  <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight">
-    Welcome To Our Luxurious Properties, With All The Conveniences.
-  </h2>
-  <p className="text-gray-400 text-sm leading-relaxed">
-    We provide world-class real estate services, helping you buy, sell, and lease luxury homes, apartments, and commercial spaces tailored to your lifestyle.
-  </p>
+        <div data-aos="fade-right" className="space-y-6">
+          <span className="text-orange-500 text-xs font-bold uppercase tracking-widest">Worldwide Properties</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight">
+            Welcome To Our Luxurious Properties, With All The Conveniences.
+          </h2>
+          <p className="text-gray-400 text-sm leading-relaxed">
+            We provide world-class real estate services, helping you buy, sell, and lease luxury homes, apartments, and commercial spaces tailored to your lifestyle.
+          </p>
 
-  <div className="grid grid-cols-2 gap-6 pt-4">
-    <div className="flex items-start gap-3">
-      <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><ShieldCheck className="w-5 h-5" /></div>
-      <div>
-        <h4 className="font-bold text-sm text-white">Verified Listings</h4>
-        <p className="text-xs text-gray-400 mt-1">Every property is thoroughly vetted for authenticity.</p>
-      </div>
-    </div>
-    <div className="flex items-start gap-3">
-      <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><UserCheck className="w-5 h-5" /></div>
-      <div>
-        <h4 className="font-bold text-sm text-white">Expert Agents</h4>
-        <p className="text-xs text-gray-400 mt-1">Professional guidance at every step of your journey.</p>
-      </div>
-    </div>
-    <div className="flex items-start gap-3">
-      <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><Key className="w-5 h-5" /></div>
-      <div>
-        <h4 className="font-bold text-sm text-white">Instant Moving</h4>
-        <p className="text-xs text-gray-400 mt-1">Quick paperwork and fast key handover process.</p>
-      </div>
-    </div>
-    <div className="flex items-start gap-3">
-      <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><FileText className="w-5 h-5" /></div>
-      <div>
-        <h4 className="font-bold text-sm text-white">Transparent Deals</h4>
-        <p className="text-xs text-gray-400 mt-1">Clear contracts with no hidden fees or charges.</p>
-      </div>
-    </div>
-  </div>
+          <div className="grid grid-cols-2 gap-6 pt-4">
+            <div className="flex items-start gap-3">
+              <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><ShieldCheck className="w-5 h-5" /></div>
+              <div>
+                <h4 className="font-bold text-sm text-white">Verified Listings</h4>
+                <p className="text-xs text-gray-400 mt-1">Every property is thoroughly vetted for authenticity.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><UserCheck className="w-5 h-5" /></div>
+              <div>
+                <h4 className="font-bold text-sm text-white">Expert Agents</h4>
+                <p className="text-xs text-gray-400 mt-1">Professional guidance at every step of your journey.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><Key className="w-5 h-5" /></div>
+              <div>
+                <h4 className="font-bold text-sm text-white">Instant Moving</h4>
+                <p className="text-xs text-gray-400 mt-1">Quick paperwork and fast key handover process.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><FileText className="w-5 h-5" /></div>
+              <div>
+                <h4 className="font-bold text-sm text-white">Transparent Deals</h4>
+                <p className="text-xs text-gray-400 mt-1">Clear contracts with no hidden fees or charges.</p>
+              </div>
+            </div>
+          </div>
 
-  <div className="flex items-center gap-6 pt-4">
-    <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-lg text-sm transition">
-      Explore Properties
-    </button>
-    <div className="flex items-center gap-3">
-      <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white">
-        <PhoneCall className="w-4 h-4" />
-      </div>
-      <div>
-        <span className="text-xs text-gray-400 block">Call Us Anytime</span>
-        <span className="font-bold text-sm text-white">+977 9821005569</span>
-      </div>
-    </div>
-  </div>
-</div>
+          <div className="flex items-center gap-6 pt-4">
+            <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-lg text-sm transition">
+              Explore Properties
+            </button>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white">
+                <PhoneCall className="w-4 h-4" />
+              </div>
+              <div>
+                <span className="text-xs text-gray-400 block">Call Us Anytime</span>
+                <span className="font-bold text-sm text-white">+977 9821005569</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <div className="relative">
+        <div data-aos="fade-left" className="relative">
           <div className="rounded-3xl overflow-hidden border border-gray-800 shadow-2xl">
             <img 
               src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=800" 
@@ -202,13 +208,13 @@ export default function LandingPage() {
 
       {/* Comfort Living Solution */}
       <section className="py-16 px-4 md:px-12 max-w-7xl mx-auto">
-        <div className="text-center mb-8">
+        <div data-aos="fade-up" className="text-center mb-8">
           <span className="text-orange-500 text-xs font-bold uppercase tracking-widest">Explore Villas</span>
           <h2 className="text-2xl md:text-3xl font-bold text-white mt-1">Comfort Living Solution</h2>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex justify-center gap-2 mb-10 overflow-x-auto pb-2">
+        <div data-aos="fade-up" data-aos-delay="100" className="flex justify-center gap-2 mb-10 overflow-x-auto pb-2">
           {['All Properties', 'For Sale', 'For Lease', 'For Rent'].map((tab) => (
             <button
               key={tab}
@@ -232,7 +238,12 @@ export default function LandingPage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {filteredProperties.map((property: any, idx) => (
-              <div key={property._id || idx} className="bg-[#1f2937] border border-gray-800 rounded-2xl overflow-hidden group hover:border-orange-500/50 transition shadow-lg">
+              <div 
+                key={property._id || idx} 
+                data-aos="fade-up"
+                data-aos-delay={(idx % 4) * 100}
+                className="bg-[#1f2937] border border-gray-800 rounded-2xl overflow-hidden group hover:border-orange-500/50 transition shadow-lg"
+              >
                 <div className="relative h-48 overflow-hidden">
                   <img 
                     src={property.images?.[0] || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=600'} 

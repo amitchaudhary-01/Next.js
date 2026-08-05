@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/component/Navbar";
 import { Toaster } from "react-hot-toast";
 import Footer from "@/component/Footer";
+import AosProvider from "@/component/AosProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,17 +31,21 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        {/* Toaster for success/error notifications */}
-        <Toaster position="top-right" />
-        
-        {/* Navbar inside the body */}
-        <Navbar />
-        
-        {/* Main page content */}
-        <main className="flex-1 flex flex-col">{children}</main>
+      <body className="min-h-full flex flex-col bg-[#111827] text-gray-100 overflow-x-hidden">
+        {/* Wrap everything inside AosProvider */}
+        <AosProvider>
+          {/* Toaster for success/error notifications */}
+          <Toaster position="top-right" />
+          
+          {/* Navbar */}
+          <Navbar />
+          
+          {/* Main page content */}
+          <main className="flex-1 flex flex-col">{children}</main>
 
-        <Footer/>
+          {/* Footer */}
+          <Footer />
+        </AosProvider>
       </body>
     </html>
   );
