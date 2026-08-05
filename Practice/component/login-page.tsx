@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, Lock, Mail, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation"; // Optional: for routing after login
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ export default function LoginPage() {
     setErrorMessage("");
 
     try {
-      const response = await fetch('http://localhost:5000/api/v1/auth/login', {
+      const response = await fetch('http://localhost:5000/api/v1/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,6 +31,7 @@ export default function LoginPage() {
 
       if (response.ok && data.success) {
         console.log("Login successful:", data);
+        toast.success("Login Successfully")
         // Optional: Save token to localStorage or cookies
         // localStorage.setItem('token', data.token);
         
@@ -37,9 +39,11 @@ export default function LoginPage() {
         router.push('/');
       } else {
         setErrorMessage(data.message || "Invalid email or password.");
+        toast.error("Invalid Email or password")
       }
     } catch (error) {
       console.error("Login failed:", error);
+      toast.error("Login Failed")
       setErrorMessage("Something went wrong. Please check your connection.");
     } finally {
       setIsLoading(false);

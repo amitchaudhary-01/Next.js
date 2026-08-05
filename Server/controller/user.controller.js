@@ -81,7 +81,7 @@ export const Login = async (req, res) => {
             });
         }
 
-        // Generate a JWT token (Fixed jwt.login to jwt.sign)
+        // Generate a JWT token 
         const token = jwt.sign(
             { id: user._id, email: user.email },
             process.env.JWT_SECRET || 'your_secret_key',

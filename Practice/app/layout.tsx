@@ -35,7 +35,7 @@ export default function RootLayout({
         {/* Wrap everything inside AosProvider */}
         <AosProvider>
           {/* Toaster for success/error notifications */}
-          <Toaster position="top-right" />
+          <Toaster position="top-center" />
           
           {/* Navbar */}
           <Navbar />
