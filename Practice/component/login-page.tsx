@@ -29,14 +29,16 @@ export default function LoginPage() {
 
       const data = await response.json();
 
-      if (response.ok && data.success) {
+if (response.ok && data.success) {
         console.log("Login successful:", data);
         toast.success("Login Successfully")
-        // Optional: Save token to localStorage or cookies
-        // localStorage.setItem('token', data.token);
+        
+        // Save token to localStorage
+        localStorage.setItem('token', data.token); 
         
         // Redirect to dashboard or home page
         router.push('/');
+      
       } else {
         setErrorMessage(data.message || "Invalid email or password.");
         toast.error("Invalid Email or password")

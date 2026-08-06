@@ -19,14 +19,26 @@ export default function CreateRoomPage() {
   });
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Retrieve the saved token from localStorage
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      toast.error("You must be logged in to publish a room.");
+      return;
+    }
+
     setLoading(true);
 
     try {
       const res = await fetch("http://localhost:5000/api/v1/room/list", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` // Pass token properly here
+        },
         body: JSON.stringify({
           ...formData,
           price: Number(formData.price),
@@ -64,6 +76,7 @@ export default function CreateRoomPage() {
     }
   };
 
+  
   return (
     <div className="min-h-screen bg-slate-50/50 py-20 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-3xl">

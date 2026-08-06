@@ -104,7 +104,7 @@ const Navbar = () => {
               Login
             </Link>
             <Link 
-              href="/logout" 
+              href="/login" 
               className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-3.5 py-2 text-sm font-medium text-rose-400 transition hover:bg-rose-500/20"
             >
               Logout
@@ -139,7 +139,7 @@ const Navbar = () => {
               <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 hover:text-orange-400">
                 Login
               </Link>
-              <Link href="/logout" onClick={() => setMobileMenuOpen(false)} className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-3.5 py-1.5 text-rose-400">
+              <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-3.5 py-1.5 text-rose-400">
                 Logout
               </Link>
             </div>
