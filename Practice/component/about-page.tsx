@@ -57,12 +57,12 @@ export default function AboutPage() {
   return (
     <>
       {/* ---------- Hero / Header Section ---------- */}
-      <section className="relative overflow-hidden bg-[#12202B] px-6 py-20 text-[#EDEEE9] sm:px-10 lg:px-16 text-center">
+      <section className="relative overflow-hidden bg-white px-6 py-20 text-orange-400 sm:px-10 lg:px-16 text-center">
         <div className="relative mx-auto max-w-3xl" data-aos="fade-down" data-aos-duration="800">
           <p className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.25em] text-[#C9A227]">
             HOME &gt; COMPANY &gt; ABOUT US
           </p>
-          <h1 className="mt-4 font-[family-name:var(--font-display)] text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F7F5F0]">
+          <h1 className="mt-4 font-[family-name:var(--font-display)] text-4xl sm:text-5xl lg:text-6xl font-bold text-orange-400">
             About Us
           </h1>
         </div>
