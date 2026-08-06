@@ -191,9 +191,9 @@ export default function AboutPage() {
       </section>
 
       {/* ---------- Timeline / Route Section ---------- */}
-      <section className="bg-[#0F1B24] px-6 py-24 sm:px-10 lg:px-16 text-[#EDEEE9]">
+      <section className="bg-orange-300 px-6 py-24 sm:px-10 lg:px-16 text-white">
         <div className="mx-auto max-w-3xl">
-          <p className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.25em] text-[#C9A227]" data-aos="fade-down">
+          <p className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.25em] text-black" data-aos="fade-down">
             Our route so far
           </p>
 
@@ -206,21 +206,21 @@ export default function AboutPage() {
                 data-aos-delay={index * 150}
               >
                 <span
-                  className="absolute -left-[3.05rem] top-1 h-3 w-3 rounded-full border-2 border-[#4FA9A0] bg-[#0F1B24]"
+                  className="absolute -left-[3.05rem] top-1 h-3 w-3 rounded-full border-2 border-[#4FA9A0] bg-[#0a0b0b]"
                   aria-hidden="true"
                 />
                 <div className="flex items-baseline gap-3">
-                  <span className="font-[family-name:var(--font-mono)] text-xs tracking-[0.15em] text-[#4FA9A0]">
+                  <span className="font-[family-name:var(--font-mono)] text-xs tracking-[0.15em] text-[#f6f8f7]">
                     {wp.tag}
                   </span>
-                  <span className="font-[family-name:var(--font-display)] italic text-[#C9A227]">
+                  <span className="font-[family-name:var(--font-display)] italic text-[#fdfcfa]">
                     {wp.year}
                   </span>
                 </div>
-                <h3 className="mt-2 font-[family-name:var(--font-display)] text-xl text-[#F7F5F0]">
+                <h3 className="mt-2 font-[family-name:var(--font-display)] text-xl text-[#080808]">
                   {wp.title}
                 </h3>
-                <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-[#C7D0D6]">
+                <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-[#f6f7f7]">
                   {wp.body}
                 </p>
               </li>
