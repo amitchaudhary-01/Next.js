@@ -230,9 +230,9 @@ export default function AboutPage() {
       </section>
 
       {/* ---------- CTA Section ---------- */}
-      <section className="bg-[#12202B] px-6 py-20 text-center sm:px-10 lg:px-16 border-t border-gray-800">
+      <section className="bg-white px-6 py-20 text-center sm:px-10 lg:px-16 border-t border-gray-800">
         <div data-aos="zoom-in" data-aos-duration="800">
-          <p className="mx-auto max-w-xl font-[family-name:var(--font-display)] text-2xl italic text-[#F7F5F0]">
+          <p className="mx-auto max-w-xl font-[family-name:var(--font-display)] text-2xl italic text-orange-400">
             Give your property search a place to call home.
           </p>
           <a
