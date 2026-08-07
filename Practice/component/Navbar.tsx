@@ -93,6 +93,9 @@ const Navbar = () => {
             <Link href="/about" className="transition hover:text-orange-400">
               About
             </Link>
+            <Link href="/news" className="transition hover:text-orange-400">
+              News & Article
+            </Link>
           </div>
 
           {/* Auth Actions (Desktop) */}
@@ -134,6 +137,9 @@ const Navbar = () => {
             </Link>
             <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-400">
               About
+            </Link>
+            <Link href="/news" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-400">
+              News & Article
             </Link>
             <div className="pt-2 flex items-center gap-3 border-t border-gray-800">
               <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 hover:text-orange-400">
