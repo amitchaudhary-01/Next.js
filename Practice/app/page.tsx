@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { useRouter } from 'next/navigation'; 
 import PropertyCategories from '@/component/PropertyCategories';
+import NewsAndArticles from '@/component/NewsAndArticles';
 
 export default function LandingPage() {
   const [activeTab, setActiveTab] = useState('All Properties');
@@ -310,6 +311,9 @@ export default function LandingPage() {
           </>
         )}
       </section>
+
+      <NewsAndArticles/>
+
 
     </div>
   );
