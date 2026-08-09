@@ -86,7 +86,7 @@ export default function LandingPage() {
             </h1>
           </div>
 
-          <div data-aos="fade-up" data-aos-delay="400" className="bg-[#1f2937]/95 backdrop-blur-md p-6 rounded-2xl shadow-xl mt-8 border border-gray-700">
+          {/* <div data-aos="fade-up" data-aos-delay="400" className="bg-[#1f2937]/95 backdrop-blur-md p-6 rounded-2xl shadow-xl mt-8 border border-gray-700">
             <div className="flex gap-6 mb-4 text-sm font-medium text-gray-300">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="radio" name="property-type" defaultChecked className="text-orange-500 focus:ring-orange-500" /> For Lease
@@ -123,7 +123,7 @@ export default function LandingPage() {
                 <Search className="w-4 h-4" /> Search Property
               </button>
             </div>
-          </div>
+          </div> */}
 
           <div data-aos="fade-in" data-aos-delay="600" className="flex flex-wrap gap-6 text-xs text-gray-300 mt-6 items-center">
             <span>✔ Over 2K Properties.</span>

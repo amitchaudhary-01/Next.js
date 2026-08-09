@@ -24,6 +24,10 @@ const createNews = async(req,res)=>{
        })
     } catch (error) {
         console.log(error)
+        return res.status(500).json({
+            success:false,
+            message:"Internal Server Error"
+        })
     }
 }
 
@@ -39,6 +43,36 @@ export const getNews = async(req,res)=>{
         })
     } catch (error) {
         console.log(error)
+        return res.status(500).json({
+            success:false,
+            message:"Internal Server Error"
+        })
     }
 }
 
+
+export const getNewsById = async(req,res)=>{
+    try {
+        const {id} = req.params
+
+        const data = await News.findById(id) 
+
+        if(!data){
+            return res.status(400).json({
+                success:false,
+                message:"News Not Found"
+            })
+        }
+
+        return res.status(200).json({
+            success:true,
+            data
+        })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            success:false,
+            message:"Internal Server Error"
+        })
+    }
+}

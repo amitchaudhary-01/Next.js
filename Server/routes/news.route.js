@@ -1,4 +1,4 @@
-import createNews, { getNews } from '../controller/news.controller.js'
+import createNews, { getNews, getNewsById } from '../controller/news.controller.js'
 import express from 'express'
 
 const router = express.Router()
@@ -6,5 +6,7 @@ const router = express.Router()
 router.post('/create',createNews)
 
 router.get('/getnews',getNews)
+
+router.get('/:id',getNewsById)
 
 export default router
