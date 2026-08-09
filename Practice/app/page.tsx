@@ -16,7 +16,7 @@ export default function LandingPage() {
   
   // Pagination State
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4; // Number of properties per page
+  const itemsPerPage = 8; // Number of properties per page
 
   const router = useRouter();
 
