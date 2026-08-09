@@ -7,6 +7,7 @@ import cors from 'cors';
 
 import UserRoute from './routes/user.route.js';
 import RoomRoute from './routes/room.route.js'
+import NewsRoute from './routes/news.route.js'
 import cookieParser from 'cookie-parser';
 
 const app = express();
@@ -33,6 +34,9 @@ app.use('/api/v1/user', UserRoute);
 ///Router room
 app.use("/api/v1/room",RoomRoute)
 
+
+//Router News
+app.use("/api/v1/news",NewsRoute)
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
