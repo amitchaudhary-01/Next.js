@@ -3,6 +3,8 @@
 import React, { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Phone, Mail, MapPin, Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react' 
+import { useRouter } from 'next/navigation'
+
 
 type Inputs = {
   name: string
@@ -16,6 +18,7 @@ type Status = 'idle' | 'submitting' | 'success' | 'error'
 const ContactSection = () => {
   const [status, setStatus] = useState<Status>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+  const router = useRouter()
 
   const {
     register,
@@ -23,6 +26,8 @@ const ContactSection = () => {
     reset,
     formState: { errors },
   } = useForm<Inputs>()
+  
+
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setStatus('submitting')
@@ -39,14 +44,16 @@ const ContactSection = () => {
 
       setStatus('success')
       reset()
+
+      // Automatically navigate to home after 1.5 seconds
+      setTimeout(() => {
+        router.push('/')
+      }, 1500)
+
     } catch (err) {
       setStatus('error')
       setErrorMessage(err instanceof Error ? err.message : 'Something went wrong.')
     }
-  }
-
-  const handleResetStatus = (): void => {
-    setStatus('idle')
   }
 
   return (
@@ -145,16 +152,10 @@ const ContactSection = () => {
                   Message Sent Successfully!
                 </h3>
                 <p className="text-sm text-gray-600 max-w-md mx-auto">
-                  Thank you for reaching out. We have received your inquiry and will get back to you within a day.
+                  Thank you for reaching out. Redirecting you to the home page shortly...
                 </p>
-                <div className="pt-4">
-                  <button
-                    type="button"
-                    onClick={handleResetStatus}
-                    className="inline-flex items-center justify-center rounded-xl bg-gray-100 px-6 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-200 transition-colors"
-                  >
-                    Send another message
-                  </button>
+                <div className="pt-2">
+                  <Loader2 className="w-5 h-5 animate-spin mx-auto text-[#C9A227]" />
                 </div>
               </div>
             ) : (
@@ -169,7 +170,7 @@ const ContactSection = () => {
                     <input
                       id="name"
                       type="text"
-                      placeholder="John Doe"
+                      placeholder="Enter name"
                       {...register('name', { required: 'Name is required' })}
                       className="mt-2 w-full rounded-xl border border-gray-200 bg-gray-50/50 px-4 py-3.5 text-gray-900 text-sm outline-none focus:border-[#C9A227] focus:bg-white focus:ring-2 focus:ring-[#C9A227]/20 transition-all"
                     />
@@ -188,7 +189,7 @@ const ContactSection = () => {
                     <input
                       id="email"
                       type="email"
-                      placeholder="john@example.com"
+                      placeholder="name@example.com"
                       {...register('email', {
                         required: 'Email is required',
                         pattern: {

@@ -4,16 +4,21 @@ import React, { useState, useEffect } from 'react';
 import { 
   Building2, Home, Store, MapPin, Search, PhoneCall, 
   Bed, Bath, Square, ShieldCheck, UserCheck, 
-  Key, FileText
+  Key, FileText, ChevronLeft, ChevronRight
 } from 'lucide-react';
-import { useRouter } from 'next/navigation'; // Import router for navigation
+import { useRouter } from 'next/navigation'; 
 import PropertyCategories from '@/component/PropertyCategories';
 
 export default function LandingPage() {
   const [activeTab, setActiveTab] = useState('All Properties');
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
-  const router = useRouter(); // Initialize router
+  
+  // Pagination State
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4; // Number of properties per page
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -33,6 +38,11 @@ export default function LandingPage() {
     fetchProperties();
   }, []);
 
+  // Reset pagination to page 1 whenever active filter tab changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab]);
+
   const categories = [
     { name: 'Apartment', count: '6 Properties', icon: <Building2 className="w-6 h-6 text-orange-500" /> },
     { name: 'Commercial', count: '4 Properties', icon: <Store className="w-6 h-6 text-orange-500" /> },
@@ -49,6 +59,12 @@ export default function LandingPage() {
     if (activeTab === 'All Properties') return true;
     return property.status === activeTab;
   });
+
+  // Calculate items for current page pagination
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentProperties = filteredProperties.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(filteredProperties.length / itemsPerPage);
 
   return (
     <div className="min-h-screen bg-[#111827] text-gray-100 font-sans overflow-x-hidden">
@@ -218,40 +234,80 @@ export default function LandingPage() {
         ) : filteredProperties.length === 0 ? (
           <div className="text-center py-12 text-gray-400">No properties available.</div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {filteredProperties.map((property: any, idx) => (
-              <div 
-                key={property._id || idx} 
-                data-aos="fade-up"
-                data-aos-delay={(idx % 4) * 100}
-                // Added onClick handler to safely route to a public details page instead of forcing login
-                onClick={() => router.push(`/rooms/${property._id}`)}
-                className="bg-[#1f2937] border border-gray-800 rounded-2xl overflow-hidden group hover:border-orange-500/50 transition shadow-lg cursor-pointer"
-              >
-                <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={property.images?.[0] || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=600'} 
-                    alt={property.title} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition duration-300" 
-                  />
-                  <span className="absolute bottom-3 left-3 bg-[#111827]/90 text-orange-400 font-bold px-3 py-1 rounded-lg text-sm border border-gray-700">
-                    ${property.price}
-                  </span>
-                </div>
-                <div className="p-5">
-                  <h3 className="font-bold text-white text-base mb-1">{property.title}</h3>
-                  <p className="text-xs text-gray-400 flex items-center gap-1 mb-4">
-                    <MapPin className="w-3.5 h-3.5 text-orange-500 shrink-0" /> {property.location}
-                  </p>
-                  <div className="flex justify-between items-center text-xs text-gray-300 pt-3 border-t border-gray-800">
-                    <span className="flex items-center gap-1"><Square className="w-3.5 h-3.5 text-orange-500" /> {property.sqft} Sq Ft</span>
-                    <span className="flex items-center gap-1"><Bed className="w-3.5 h-3.5 text-orange-500" /> {property.beds} Beds</span>
-                    <span className="flex items-center gap-1"><Bath className="w-3.5 h-3.5 text-orange-500" /> {property.baths} Baths</span>
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+              {currentProperties.map((property: any, idx) => (
+                <div 
+                  key={property._id || idx} 
+                  data-aos="fade-up"
+                  data-aos-delay={(idx % 4) * 100}
+                  onClick={() => router.push(`/rooms/${property._id}`)}
+                  className="bg-[#1f2937] border border-gray-800 rounded-2xl overflow-hidden group hover:border-orange-500/50 transition shadow-lg cursor-pointer flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="relative h-48 overflow-hidden">
+                      <img 
+                        src={property.images?.[0] || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=600'} 
+                        alt={property.title} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition duration-300" 
+                      />
+                      <span className="absolute bottom-3 left-3 bg-[#111827]/90 text-orange-400 font-bold px-3 py-1 rounded-lg text-sm border border-gray-700">
+                        ${property.price}
+                      </span>
+                    </div>
+                    <div className="p-5">
+                      <h3 className="font-bold text-white text-base mb-1">{property.title}</h3>
+                      <p className="text-xs text-gray-400 flex items-center gap-1 mb-4">
+                        <MapPin className="w-3.5 h-3.5 text-orange-500 shrink-0" /> {property.location}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="p-5 pt-0">
+                    <div className="flex justify-between items-center text-xs text-gray-300 pt-3 border-t border-gray-800">
+                      <span className="flex items-center gap-1"><Square className="w-3.5 h-3.5 text-orange-500" /> {property.sqft} Sq Ft</span>
+                      <span className="flex items-center gap-1"><Bed className="w-3.5 h-3.5 text-orange-500" /> {property.beds} Beds</span>
+                      <span className="flex items-center gap-1"><Bath className="w-3.5 h-3.5 text-orange-500" /> {property.baths} Baths</span>
+                    </div>
                   </div>
                 </div>
+              ))}
+            </div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="flex justify-center items-center gap-2 mt-12">
+                <button
+                  onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                  disabled={currentPage === 1}
+                  className="p-2.5 rounded-xl bg-[#1f2937] text-gray-300 border border-gray-800 hover:border-orange-500/50 disabled:opacity-40 disabled:cursor-not-allowed transition"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`w-10 h-10 rounded-xl text-xs font-semibold transition ${
+                      currentPage === page
+                        ? 'bg-orange-500 text-white shadow-md'
+                        : 'bg-[#1f2937] text-gray-400 hover:text-white border border-gray-800'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
+
+                <button
+                  onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                  disabled={currentPage === totalPages}
+                  className="p-2.5 rounded-xl bg-[#1f2937] text-gray-300 border border-gray-800 hover:border-orange-500/50 disabled:opacity-40 disabled:cursor-not-allowed transition"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
               </div>
-            ))}
-          </div>
+            )}
+          </>
         )}
       </section>
 

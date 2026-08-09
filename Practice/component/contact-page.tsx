@@ -5,19 +5,19 @@ const channels = [
     tag: "WP·GEN",
     label: "General",
     value: "hello@waypoint.dev",
-    href: "mailto:hello@waypoint.dev",
+    href: "mailto:ac984939@gmail.com",
   },
   {
     tag: "WP·SUP",
     label: "Support",
     value: "support@waypoint.dev",
-    href: "mailto:support@waypoint.dev",
+    href: "mailto:ac984939@gmail.com",
   },
   {
     tag: "WP·SLS",
     label: "Sales",
     value: "sales@waypoint.dev",
-    href: "mailto:sales@waypoint.dev",
+    href: "mailto:ac984939@gmail.com",
   },
 ];
 
