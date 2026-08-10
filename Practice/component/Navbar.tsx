@@ -66,7 +66,7 @@ const Navbar = () => {
       </div>
 
       {/* Main Navbar */}
-      <nav className="border-b border-slate-200 bg-white/95 px-4 py-3 shadow-sm backdrop-blur-md sm:px-6 md:px-12">
+      <nav className="border-b border-slate-200 bg-gray-300 px-4 py-3 shadow-sm backdrop-blur-md sm:px-6 md:px-12">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
           
           {/* Brand / Logo */}

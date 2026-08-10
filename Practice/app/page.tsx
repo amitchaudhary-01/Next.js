@@ -83,7 +83,7 @@ export default function LandingPage() {
   style={{ backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1600')` }}
 >
           <div data-aos="fade-right" data-aos-delay="200" className="text-center md:text-left max-w-2xl">
-            <span className="text-orange-700 text-xs font-bold tracking-widest uppercase bg-orange-500/20 px-3.5 py-1.5 rounded-full border border-orange-500/30 backdrop-blur-md shadow-inner">
+            <span className="text-fuchsia-600 text-xs font-bold tracking-widest uppercase bg-gray-300 px-3.5 py-1.5 rounded-full border border-orange-500/30 backdrop-blur-md shadow-inner">
               NOW TRUSTED
             </span>
             <h1 className="text-3xl md:text-5xl font-extrabold text-white mt-4 leading-tight tracking-tight drop-shadow-md">
