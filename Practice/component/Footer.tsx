@@ -3,7 +3,7 @@ import Newsletter from './newsletter';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0b0f19] pt-16 pb-8 px-4 md:px-12 border-t border-gray-800">
+    <footer className="bg-[#192951] pt-16 pb-8 px-4 md:px-12 border-t border-gray-500">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-12 pb-12 border-b border-gray-800">
         
         <div className="md:col-span-2 space-y-4">

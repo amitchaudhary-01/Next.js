@@ -68,160 +68,129 @@ export default function LandingPage() {
   const totalPages = Math.ceil(filteredProperties.length / itemsPerPage);
 
   return (
-    <div className="min-h-screen bg-[#111827] text-gray-100 font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans overflow-x-hidden relative selection:bg-orange-500 selection:text-white">
       
+      {/* Background Ambient Modern Glow Effects (Light Version) */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/3 right-10 w-[500px] h-[500px] bg-blue-500 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-10 w-[400px] h-[400px] bg-orange-500 rounded-full blur-[140px] pointer-events-none" />
+
       {/* Hero Section */}
-      <header className="relative bg-[#111827] px-4 md:px-12 pt-8 pb-20">
+      <header className="relative px-4 md:px-12 pt-8 pb-20">
         <div 
-          data-aos="fade-down"
-          className="max-w-7xl mx-auto rounded-3xl overflow-hidden relative bg-cover bg-center min-h-[500px] flex flex-col justify-between p-6 md:p-12 shadow-2xl"
-          style={{ backgroundImage: `linear-gradient(rgba(17, 24, 39, 0.6), rgba(17, 24, 39, 0.7)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1600')` }}
-        >
+  data-aos="fade-down"
+  className="max-w-7xl mx-auto rounded-3xl overflow-hidden relative bg-cover bg-center min-h-[500px] flex flex-col justify-between p-6 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-200/80 backdrop-blur-sm"
+  style={{ backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1600')` }}
+>
           <div data-aos="fade-right" data-aos-delay="200" className="text-center md:text-left max-w-2xl">
-            <span className="text-orange-400 text-xs font-bold tracking-widest uppercase bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20">
+            <span className="text-orange-700 text-xs font-bold tracking-widest uppercase bg-orange-500/20 px-3.5 py-1.5 rounded-full border border-orange-500/30 backdrop-blur-md shadow-inner">
               NOW TRUSTED
             </span>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-white mt-4 leading-tight">
+            <h1 className="text-3xl md:text-5xl font-extrabold text-white mt-4 leading-tight tracking-tight drop-shadow-md">
               Perfect Firm For Selling Or Leasing Houses, Flats, And Rooms
             </h1>
           </div>
 
-          {/* <div data-aos="fade-up" data-aos-delay="400" className="bg-[#1f2937]/95 backdrop-blur-md p-6 rounded-2xl shadow-xl mt-8 border border-gray-700">
-            <div className="flex gap-6 mb-4 text-sm font-medium text-gray-300">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input type="radio" name="property-type" defaultChecked className="text-orange-500 focus:ring-orange-500" /> For Lease
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input type="radio" name="property-type" className="text-orange-500 focus:ring-orange-500" /> For Rent
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input type="radio" name="property-type" className="text-orange-500 focus:ring-orange-500" /> For Sale
-              </label>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <input 
-                type="text" 
-                placeholder="Enter Keyword..." 
-                className="bg-[#111827] border border-gray-700 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-orange-500" 
-              />
-              <select className="bg-[#111827] border border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-400 focus:outline-none focus:border-orange-500">
-                <option>Property Type</option>
-              </select>
-              <div className="relative">
-                <input 
-                  type="text" 
-                  placeholder="Location" 
-                  className="w-full bg-[#111827] border border-gray-700 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-orange-500 pr-10" 
-                />
-                <MapPin className="w-4 h-4 text-gray-400 absolute right-3 top-3.5" />
-              </div>
-            </div>
-
-            <div className="mt-4 flex justify-end">
-              <button className="w-full md:w-auto bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg flex items-center justify-center gap-2 transition">
-                <Search className="w-4 h-4" /> Search Property
-              </button>
-            </div>
-          </div> */}
-
-          <div data-aos="fade-in" data-aos-delay="600" className="flex flex-wrap gap-6 text-xs text-gray-300 mt-6 items-center">
-            <span>✔ Over 2K Properties.</span>
-            <span>✔ 46,759 people lease</span>
-            <span className="text-yellow-400 font-semibold">★ 4.8 Trusted by People</span>
+          <div data-aos="fade-in" data-aos-delay="600" className="flex flex-wrap gap-6 text-xs text-slate-800 mt-6 items-center">
+            <span className="bg-white/70 px-3.5 py-2 rounded-xl border border-slate-300 backdrop-blur-md shadow-sm font-medium">✔ Over 2K Properties.</span>
+            <span className="bg-white/70 px-3.5 py-2 rounded-xl border border-slate-300 backdrop-blur-md shadow-sm font-medium">✔ 46,759 people lease</span>
+            <span className="text-amber-800 font-bold bg-white/70 px-3.5 py-2 rounded-xl border border-amber-400/40 backdrop-blur-md shadow-sm">★ 4.8 Trusted by People</span>
           </div>
         </div>
       </header>
 
       {/* Property Categories Component */}
-      <PropertyCategories categories={categories} onCategoryClick={handleCategoryClick} />
+      <div className="relative z-10">
+        <PropertyCategories categories={categories} onCategoryClick={handleCategoryClick} />
+      </div>
 
       {/* Welcome Section */}
-      <section className="py-16 px-4 md:px-12 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="py-20 px-4 md:px-12 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
         <div data-aos="fade-right" className="space-y-6">
-          <span className="text-orange-500 text-xs font-bold uppercase tracking-widest">Worldwide Properties</span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight">
+          <span className="text-orange-600 text-xs font-bold uppercase tracking-widest bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20">Worldwide Properties</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">
             Welcome To Our Luxurious Properties, With All The Conveniences.
           </h2>
-          <p className="text-gray-400 text-sm leading-relaxed">
+          <p className="text-slate-600 text-sm leading-relaxed">
             We provide world-class real estate services, helping you buy, sell, and lease luxury homes, apartments, and commercial spaces tailored to your lifestyle.
           </p>
 
           <div className="grid grid-cols-2 gap-6 pt-4">
-            <div className="flex items-start gap-3">
-              <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><ShieldCheck className="w-5 h-5" /></div>
+            <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-orange-500/30 transition">
+              <div className="p-2 bg-orange-500/10 text-orange-600 rounded-xl"><ShieldCheck className="w-5 h-5" /></div>
               <div>
-                <h4 className="font-bold text-sm text-white">Verified Listings</h4>
-                <p className="text-xs text-gray-400 mt-1">Every property is thoroughly vetted for authenticity.</p>
+                <h4 className="font-bold text-sm text-slate-900">Verified Listings</h4>
+                <p className="text-xs text-slate-600 mt-1">Every property is thoroughly vetted for authenticity.</p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><UserCheck className="w-5 h-5" /></div>
+            <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-orange-500/30 transition">
+              <div className="p-2 bg-orange-500/10 text-orange-600 rounded-xl"><UserCheck className="w-5 h-5" /></div>
               <div>
-                <h4 className="font-bold text-sm text-white">Expert Agents</h4>
-                <p className="text-xs text-gray-400 mt-1">Professional guidance at every step of your journey.</p>
+                <h4 className="font-bold text-sm text-slate-900">Expert Agents</h4>
+                <p className="text-xs text-slate-600 mt-1">Professional guidance at every step of your journey.</p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><Key className="w-5 h-5" /></div>
+            <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-orange-500/30 transition">
+              <div className="p-2 bg-orange-500/10 text-orange-600 rounded-xl"><Key className="w-5 h-5" /></div>
               <div>
-                <h4 className="font-bold text-sm text-white">Instant Moving</h4>
-                <p className="text-xs text-gray-400 mt-1">Quick paperwork and fast key handover process.</p>
+                <h4 className="font-bold text-sm text-slate-900">Instant Moving</h4>
+                <p className="text-xs text-slate-600 mt-1">Quick paperwork and fast key handover process.</p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg"><FileText className="w-5 h-5" /></div>
+            <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-orange-500/30 transition">
+              <div className="p-2 bg-orange-500/10 text-orange-600 rounded-xl"><FileText className="w-5 h-5" /></div>
               <div>
-                <h4 className="font-bold text-sm text-white">Transparent Deals</h4>
-                <p className="text-xs text-gray-400 mt-1">Clear contracts with no hidden fees or charges.</p>
+                <h4 className="font-bold text-sm text-slate-900">Transparent Deals</h4>
+                <p className="text-xs text-slate-600 mt-1">Clear contracts with no hidden fees or charges.</p>
               </div>
             </div>
           </div>
 
           <div className="flex items-center gap-6 pt-4">
-            <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-lg text-sm transition">
+            <button className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold px-6 py-3.5 rounded-xl text-sm transition shadow-[0_4px_20px_rgba(249,115,22,0.3)]">
               Explore Properties
             </button>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white">
+              <div className="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-600">
                 <PhoneCall className="w-4 h-4" />
               </div>
               <div>
-                <span className="text-xs text-gray-400 block">Call Us Anytime</span>
-                <span className="font-bold text-sm text-white">+977 9821005569</span>
+                <span className="text-xs text-slate-500 block">Call Us Anytime</span>
+                <span className="font-bold text-sm text-slate-900">+977 9821005569</span>
               </div>
             </div>
           </div>
         </div>
 
         <div data-aos="fade-left" className="relative">
-          <div className="rounded-3xl overflow-hidden border border-gray-800 shadow-2xl">
+          <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-blue-500 rounded-3xl blur-xl opacity-20"></div>
+          <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-white">
             <img 
               src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=800" 
               alt="Luxury home" 
-              className="w-full object-cover"
+              className="w-full object-cover transform hover:scale-105 transition duration-700"
             />
           </div>
         </div>
       </section>
 
       {/* Comfort Living Solution */}
-      <section className="py-16 px-4 md:px-12 max-w-7xl mx-auto">
-        <div data-aos="fade-up" className="text-center mb-8">
-          <span className="text-orange-500 text-xs font-bold uppercase tracking-widest">Explore Villas</span>
-          <h2 className="text-2xl md:text-3xl font-bold text-white mt-1">Comfort Living Solution</h2>
+      <section className="py-20 px-4 md:px-12 max-w-7xl mx-auto relative z-10">
+        <div data-aos="fade-up" className="text-center mb-10">
+          <span className="text-orange-600 text-xs font-bold uppercase tracking-widest bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20">Explore Villas</span>
+          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-3">Comfort Living Solution</h2>
         </div>
 
         {/* Filter Tabs */}
-        <div data-aos="fade-up" data-aos-delay="100" className="flex justify-center gap-2 mb-10 overflow-x-auto pb-2">
+        <div data-aos="fade-up" data-aos-delay="100" className="flex justify-center gap-2 mb-12 overflow-x-auto pb-2">
           {['All Properties', 'For Sale', 'For Lease', 'For Rent'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-5 py-2.5 rounded-full text-xs font-semibold transition ${
+              className={`px-6 py-2.5 rounded-full text-xs font-semibold transition backdrop-blur-md ${
                 activeTab === tab 
-                  ? 'bg-orange-500 text-white' 
-                  : 'bg-[#1f2937] text-gray-400 hover:text-white border border-gray-800'
+                  ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-[0_4px_15px_rgba(249,115,22,0.3)] border border-orange-400/30' 
+                  : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200 hover:border-slate-300 shadow-sm'
               }`}
             >
               {tab}
@@ -231,9 +200,9 @@ export default function LandingPage() {
 
         {/* Property Grid with Real Backend Data */}
         {loading ? (
-          <div className="text-center py-12 text-gray-400">Loading properties...</div>
+          <div className="text-center py-16 text-slate-500 bg-white rounded-3xl border border-slate-200 shadow-sm">Loading properties...</div>
         ) : filteredProperties.length === 0 ? (
-          <div className="text-center py-12 text-gray-400">No properties available.</div>
+          <div className="text-center py-16 text-slate-500 bg-white rounded-3xl border border-slate-200 shadow-sm">No properties available.</div>
         ) : (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
@@ -243,31 +212,32 @@ export default function LandingPage() {
                   data-aos="fade-up"
                   data-aos-delay={(idx % 4) * 100}
                   onClick={() => router.push(`/rooms/${property._id}`)}
-                  className="bg-[#1f2937] border border-gray-800 rounded-2xl overflow-hidden group hover:border-orange-500/50 transition shadow-lg cursor-pointer flex flex-col justify-between"
+                  className="bg-white hover:bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden group hover:border-orange-500/50 transition duration-300 shadow-[0_4px_20px_rgb(0,0,0,0.06)] cursor-pointer flex flex-col justify-between"
                 >
                   <div>
                     <div className="relative h-48 overflow-hidden">
                       <img 
                         src={property.images?.[0] || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=600'} 
                         alt={property.title} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition duration-300" 
+                        className="w-full h-full object-cover group-hover:scale-110 transition duration-500" 
                       />
-                      <span className="absolute bottom-3 left-3 bg-[#111827]/90 text-orange-400 font-bold px-3 py-1 rounded-lg text-sm border border-gray-700">
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent"></div>
+                      <span className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md text-orange-600 font-bold px-3 py-1.5 rounded-xl text-sm border border-slate-200 shadow-md">
                         ${property.price}
                       </span>
                     </div>
                     <div className="p-5">
-                      <h3 className="font-bold text-white text-base mb-1">{property.title}</h3>
-                      <p className="text-xs text-gray-400 flex items-center gap-1 mb-4">
-                        <MapPin className="w-3.5 h-3.5 text-orange-500 shrink-0" /> {property.location}
+                      <h3 className="font-bold text-slate-900 text-base mb-1 group-hover:text-orange-600 transition">{property.title}</h3>
+                      <p className="text-xs text-slate-600 flex items-center gap-1.5 mb-2">
+                        <MapPin className="w-3.5 h-3.5 text-orange-600 shrink-0" /> {property.location}
                       </p>
                     </div>
                   </div>
                   <div className="p-5 pt-0">
-                    <div className="flex justify-between items-center text-xs text-gray-300 pt-3 border-t border-gray-800">
-                      <span className="flex items-center gap-1"><Square className="w-3.5 h-3.5 text-orange-500" /> {property.sqft} Sq Ft</span>
-                      <span className="flex items-center gap-1"><Bed className="w-3.5 h-3.5 text-orange-500" /> {property.beds} Beds</span>
-                      <span className="flex items-center gap-1"><Bath className="w-3.5 h-3.5 text-orange-500" /> {property.baths} Baths</span>
+                    <div className="flex justify-between items-center text-xs text-slate-600 pt-3 border-t border-slate-100">
+                      <span className="flex items-center gap-1"><Square className="w-3.5 h-3.5 text-orange-600" /> {property.sqft} Sq Ft</span>
+                      <span className="flex items-center gap-1"><Bed className="w-3.5 h-3.5 text-orange-600" /> {property.beds} Beds</span>
+                      <span className="flex items-center gap-1"><Bath className="w-3.5 h-3.5 text-orange-600" /> {property.baths} Baths</span>
                     </div>
                   </div>
                 </div>
@@ -280,7 +250,7 @@ export default function LandingPage() {
                 <button
                   onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                   disabled={currentPage === 1}
-                  className="p-2.5 rounded-xl bg-[#1f2937] text-gray-300 border border-gray-800 hover:border-orange-500/50 disabled:opacity-40 disabled:cursor-not-allowed transition"
+                  className="p-2.5 rounded-xl bg-white text-slate-700 border border-slate-200 hover:border-orange-500/50 disabled:opacity-40 disabled:cursor-not-allowed transition shadow-sm"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
@@ -291,8 +261,8 @@ export default function LandingPage() {
                     onClick={() => setCurrentPage(page)}
                     className={`w-10 h-10 rounded-xl text-xs font-semibold transition ${
                       currentPage === page
-                        ? 'bg-orange-500 text-white shadow-md'
-                        : 'bg-[#1f2937] text-gray-400 hover:text-white border border-gray-800'
+                        ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-[0_4px_15px_rgba(249,115,22,0.3)] border border-orange-400/30'
+                        : 'bg-white text-slate-700 hover:text-slate-900 border border-slate-200 shadow-sm'
                     }`}
                   >
                     {page}
@@ -302,7 +272,7 @@ export default function LandingPage() {
                 <button
                   onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                   disabled={currentPage === totalPages}
-                  className="p-2.5 rounded-xl bg-[#1f2937] text-gray-300 border border-gray-800 hover:border-orange-500/50 disabled:opacity-40 disabled:cursor-not-allowed transition"
+                  className="p-2.5 rounded-xl bg-white text-slate-700 border border-slate-200 hover:border-orange-500/50 disabled:opacity-40 disabled:cursor-not-allowed transition shadow-sm"
                 >
                   <ChevronRight className="w-4 h-4" />
                 </button>
@@ -312,8 +282,9 @@ export default function LandingPage() {
         )}
       </section>
 
-      <NewsAndArticles/>
-
+      <div className="relative z-10">
+        <NewsAndArticles/>
+      </div>
 
     </div>
   );

@@ -49,24 +49,24 @@ const Navbar = () => {
   return (
     <div className="sticky top-0 z-50 w-full">
       {/* Top Utility Bar */}
-      <div className="bg-[#1f2937] text-xs py-2 px-4 md:px-12 flex justify-between items-center border-b border-gray-800 text-gray-400">
+      <div className="bg-slate-100 text-xs py-2 px-4 md:px-12 flex justify-between items-center border-b border-slate-200 text-slate-600">
         <div className="flex items-center space-x-6">
-          <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-orange-500" /> Rupandehi, Butwal, Nepal</span>
-          <span className="flex items-center gap-1"><Phone className="w-3.5 h-3.5 text-orange-500" /> +977 9821005569</span>
+          <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-orange-600" /> Rupandehi, Butwal, Nepal</span>
+          <span className="flex items-center gap-1"><Phone className="w-3.5 h-3.5 text-orange-600" /> +977 9821005569</span>
         </div>
         <div className="flex items-center space-x-6">
           <span className="hidden sm:inline">Mon to Sat: 09:00 to 23:00</span>
           <div className="hidden md:flex items-center space-x-3">
-            <FacebookIcon className="w-3.5 h-3.5 hover:text-orange-500 cursor-pointer" />
-            <TwitterIcon className="w-3.5 h-3.5 hover:text-orange-500 cursor-pointer" />
-            <InstagramIcon className="w-3.5 h-3.5 hover:text-orange-500 cursor-pointer" />
-            <LinkedinIcon className="w-3.5 h-3.5 hover:text-orange-500 cursor-pointer" />
+            <FacebookIcon className="w-3.5 h-3.5 hover:text-orange-600 cursor-pointer" />
+            <TwitterIcon className="w-3.5 h-3.5 hover:text-orange-600 cursor-pointer" />
+            <InstagramIcon className="w-3.5 h-3.5 hover:text-orange-600 cursor-pointer" />
+            <LinkedinIcon className="w-3.5 h-3.5 hover:text-orange-600 cursor-pointer" />
           </div>
         </div>
       </div>
 
       {/* Main Navbar */}
-      <nav className="border-b border-gray-800 bg-[#111827]/95 px-4 py-3 shadow-md backdrop-blur-md sm:px-6 md:px-12">
+      <nav className="border-b border-slate-200 bg-white/95 px-4 py-3 shadow-sm backdrop-blur-md sm:px-6 md:px-12">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
           
           {/* Brand / Logo */}
@@ -74,26 +74,26 @@ const Navbar = () => {
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-orange-500 text-white font-bold shadow-md shadow-orange-500/20 transition group-hover:scale-105">
               <HomeIcon className="h-5 w-5" />
             </div>
-            <span className="text-xl font-bold tracking-tight text-white">
-              Vee<span className="text-orange-500">doo</span>
+            <span className="text-xl font-bold tracking-tight text-slate-900">
+              Vee<span className="text-orange-600">doo</span>
             </span>
           </Link>
 
           {/* Main Navigation Links (Desktop) */}
-          <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
-            <Link href="/" className="text-orange-500 transition hover:text-orange-400">
+          <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
+            <Link href="/" className="text-orange-600 transition hover:text-orange-500">
               Home
             </Link>
-            <Link href="/getroom" className="transition hover:text-orange-400">
+            <Link href="/getroom" className="transition hover:text-orange-600">
               Rooms
             </Link>
-            <Link href="/contact" className="transition hover:text-orange-400">
+            <Link href="/contact" className="transition hover:text-orange-600">
               Contact
             </Link>
-            <Link href="/about" className="transition hover:text-orange-400">
+            <Link href="/about" className="transition hover:text-orange-600">
               About
             </Link>
-            <Link href="/news" className="transition hover:text-orange-400">
+            <Link href="/news" className="transition hover:text-orange-600">
               News & Article
             </Link>
           </div>
@@ -102,13 +102,13 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-3 sm:gap-4">
             <Link 
               href="/login" 
-              className="text-sm font-medium text-gray-300 transition hover:text-orange-400"
+              className="text-sm font-medium text-slate-600 transition hover:text-orange-600"
             >
               Login
             </Link>
             <Link 
               href="/login" 
-              className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-3.5 py-2 text-sm font-medium text-rose-400 transition hover:bg-rose-500/20"
+              className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-3.5 py-2 text-sm font-medium text-rose-600 transition hover:bg-rose-500/20"
             >
               Logout
             </Link>
@@ -116,7 +116,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-gray-300 focus:outline-none">
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-slate-700 focus:outline-none">
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
@@ -125,27 +125,27 @@ const Navbar = () => {
 
         {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-gray-800 pt-4 flex flex-col space-y-3 text-sm font-medium text-gray-300">
-            <Link href="/" onClick={() => setMobileMenuOpen(false)} className="text-orange-500 transition">
+          <div className="md:hidden mt-4 pb-4 border-t border-slate-200 pt-4 flex flex-col space-y-3 text-sm font-medium text-slate-700">
+            <Link href="/" onClick={() => setMobileMenuOpen(false)} className="text-orange-600 transition">
               Home
             </Link>
-            <Link href="/getroom" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-400">
+            <Link href="/getroom" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-600">
               Rooms
             </Link>
-            <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-400">
+            <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-600">
               Contact
             </Link>
-            <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-400">
+            <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-600">
               About
             </Link>
-            <Link href="/news" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-400">
+            <Link href="/news" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-600">
               News & Article
             </Link>
-            <div className="pt-2 flex items-center gap-3 border-t border-gray-800">
-              <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 hover:text-orange-400">
+            <div className="pt-2 flex items-center gap-3 border-t border-slate-200">
+              <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="text-slate-600 hover:text-orange-600">
                 Login
               </Link>
-              <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-3.5 py-1.5 text-rose-400">
+              <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-3.5 py-1.5 text-rose-600">
                 Logout
               </Link>
             </div>
