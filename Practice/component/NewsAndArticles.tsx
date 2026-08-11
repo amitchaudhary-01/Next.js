@@ -44,7 +44,7 @@ export default function NewsAndArticles() {
         <span className="text-orange-500 text-3xl font-bold uppercase tracking-widest">
           News & Insights
         </span>
-        <h2 className="text-2xl md:text-3xl font-bold text-white mt-1">
+        <h2 className="text-2xl md:text-3xl font-bold text-black mt-1">
           Recent Articles & Updates
         </h2>
       </div>
