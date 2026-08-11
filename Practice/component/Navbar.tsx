@@ -127,26 +127,59 @@ const Navbar = () => {
           </Link>
 
           {/* Main Navigation Links (Desktop) */}
-          <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
-            <Link
-              href="/"
-              className="text-orange-600 transition hover:text-orange-500"
-            >
-              Home
-            </Link>
-            <Link href="/getroom" className="transition hover:text-orange-600">
-              Rooms
-            </Link>
-            <Link href="/contact" className="transition hover:text-orange-600">
-              Contact
-            </Link>
-            <Link href="/about" className="transition hover:text-orange-600">
-              About
-            </Link>
-            <Link href="/news" className="transition hover:text-orange-600">
-              News & Article
-            </Link>
-          </div>
+        
+
+
+<div className="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
+  <Link
+    href="/"
+    className="group relative py-2 transition-colors duration-300 text-orange-600 "
+  >
+    Home
+
+    <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-500 transition-all duration-300 ease-out group-hover:w-full" />
+  </Link>
+
+  <Link
+    href="/getroom"
+    className="group relative py-2 transition-colors duration-300 hover:text-orange-600"
+  >
+    Rooms
+
+    <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-500 transition-all duration-300 ease-out group-hover:w-full" />
+  </Link>
+
+  <Link
+    href="/contact"
+    className="group relative py-2 transition-colors duration-300 hover:text-orange-600"
+  >
+    Contact
+
+    <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-500 transition-all duration-300 ease-out group-hover:w-full" />
+  </Link>
+
+  <Link
+    href="/about"
+    className="group relative py-2 transition-colors duration-300 hover:text-orange-600"
+  >
+    About
+
+    <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-500 transition-all duration-300 ease-out group-hover:w-full" />
+  </Link>
+
+  <Link
+    href="/news"
+    className="group relative py-2 transition-colors duration-300 hover:text-orange-600"
+  >
+    News & Article
+
+    <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-500 transition-all duration-300 ease-out group-hover:w-full" />
+  </Link>
+</div>
+
+
+
+
 
           {/* Auth Actions (Desktop) */}
           <div className="hidden md:flex items-center gap-3 sm:gap-4">
