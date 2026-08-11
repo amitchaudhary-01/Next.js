@@ -72,8 +72,13 @@ export default function LandingPage() {
       
       {/* Background Ambient Modern Glow Effects (Light Version) */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500 rounded-full blur-[120px] pointer-events-none" />
+       <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-fuchsia-500 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-1 center-5 w-[400px] h-[400px] bg-fuchsia-500 rounded-full blur-[140px] pointer-events-none" />
+       <div className="absolute bottom-1/2 left-10 w-[400px] h-[400px] bg-fuchsia-500 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-1/3 right-10 w-[500px] h-[500px] bg-blue-500 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-10 w-[400px] h-[400px] bg-orange-500 rounded-full blur-[140px] pointer-events-none" />
+       <div className="absolute bottom-1/5 left-10 w-[400px] h-[400px] bg-fuchsia-500 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-1/6 right-10 w-[400px] h-[400px] bg-orange-500 rounded-full blur-[140px] pointer-events-none" />
 
       {/* Hero Section */}
       <header className="relative px-4 md:px-12 pt-8 pb-20">
