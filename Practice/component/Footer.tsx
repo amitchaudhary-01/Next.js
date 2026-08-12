@@ -21,7 +21,7 @@ const Footer = () => {
           <div className="flex space-x-3 pt-2">
   {/* Facebook */}
   <a
-    href="#"
+    href="facebook"
     aria-label="Facebook"
     className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1f2937] text-gray-300 transition-all duration-300 hover:-translate-y-1 hover:bg-orange-500 hover:text-white"
   >
@@ -30,7 +30,7 @@ const Footer = () => {
 
   {/* X / Twitter */}
   <a
-    href="#"
+    href="twitter"
     aria-label="X / Twitter"
     className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1f2937] text-gray-300 transition-all duration-300 hover:-translate-y-1 hover:bg-orange-500 hover:text-white"
   >
@@ -39,7 +39,7 @@ const Footer = () => {
 
   {/* Instagram */}
   <a
-    href="#"
+    href="instagram"
     aria-label="Instagram"
     className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1f2937] text-gray-300 transition-all duration-300 hover:-translate-y-1 hover:bg-orange-500 hover:text-white"
   >
@@ -48,7 +48,7 @@ const Footer = () => {
 
   {/* LinkedIn */}
   <a
-    href="#"
+    href="linkedin"
     aria-label="LinkedIn"
     className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1f2937] text-gray-300 transition-all duration-300 hover:-translate-y-1 hover:bg-orange-500 hover:text-white"
   >
@@ -71,11 +71,11 @@ const Footer = () => {
         <div>
           <h4 className="font-bold text-white text-sm mb-4">Property Types</h4>
           <ul className="space-y-2 text-xs text-gray-400">
-            <li><a href="#" className="hover:text-orange-500 transition">Apartment Suites</a></li>
-            <li><a href="#" className="hover:text-orange-500 transition">Commercial Spaces</a></li>
-            <li><a href="#" className="hover:text-orange-500 transition">Sale Shops</a></li>
-            <li><a href="#" className="hover:text-orange-500 transition">Town Ships</a></li>
-            <li><a href="#" className="hover:text-orange-500 transition">Luxury Villas</a></li>
+            <li><a href="apartment suites" className="hover:text-orange-500 transition">Apartment Suites</a></li>
+            <li><a href="commercial spaces" className="hover:text-orange-500 transition">Commercial Spaces</a></li>
+            <li><a href="sale shops" className="hover:text-orange-500 transition">Sale Shops</a></li>
+            <li><a href="town ships" className="hover:text-orange-500 transition">Town Ships</a></li>
+            <li><a href="luxury villas" className="hover:text-orange-500 transition">Luxury Villas</a></li>
           </ul>
         </div>
 
