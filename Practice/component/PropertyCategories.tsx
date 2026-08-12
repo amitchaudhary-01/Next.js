@@ -18,7 +18,7 @@ export default function PropertyCategories({ categories, onCategoryClick }: Prop
     <section className="py-6 px-4 md:px-12 max-w-7xl mx-auto">
       <div data-aos="fade-up" className="text-center mb-10">
         <span className="text-orange-500 text-xs font-bold uppercase tracking-widest">Simple Listing</span>
-        <h2 className="text-2xl md:text-3xl font-bold text-white mt-1">Search By Property Requirement</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-black mt-1">Search By Property Requirement</h2>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
