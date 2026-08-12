@@ -11,7 +11,7 @@ const Newsletter = () => {
       
       {isSubmitted ? (
         <div className="bg-[#1f2937] border border-gray-700 rounded-lg p-3 text-center">
-          <p className="text-xs font-semibold text-white mb-1">🎉 You're on the list!</p>
+          <p className="text-xs font-semibold text-white mb-1"> You're on the list!</p>
           <p className="text-[11px] text-gray-400">Thanks for subscribing. Check your inbox soon.</p>
         </div>
       ) : (
