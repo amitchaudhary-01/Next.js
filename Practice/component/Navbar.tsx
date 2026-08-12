@@ -89,7 +89,7 @@ const Navbar = () => {
   return (
     <div className="sticky top-0 z-50 w-full">
       {/* Top Utility Bar */}
-      <div className="bg-slate-100 text-xs py-2 px-4 md:px-12 flex justify-between items-center border-b border-slate-200 text-slate-600">
+      <div className="bg-slate-300 text-xs py-2 px-4 md:px-12 flex justify-between items-center border-b border-slate-200 text-slate-600">
         <div className="flex items-center space-x-6">
           <span className="flex items-center gap-1">
             <MapPin className="w-3.5 h-3.5 text-orange-600" /> Rupandehi,
@@ -114,7 +114,7 @@ const Navbar = () => {
       </div>
 
       {/* Main Navbar */}
-      <nav className="border-b border-slate-200 bg-gray-300 px-4 py-3 shadow-sm backdrop-blur-md sm:px-6 md:px-12">
+      <nav className="border-b border-slate-200 bg-gray-400 px-4 py-3 shadow-sm backdrop-blur-md sm:px-6 md:px-12">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
           {/* Brand / Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
