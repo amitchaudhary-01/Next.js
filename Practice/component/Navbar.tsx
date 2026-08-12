@@ -185,7 +185,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-3 sm:gap-4">
             <Link
               href="/login"
-              className="text-sm font-medium text-slate-600 transition hover:text-orange-600"
+              className="text-sm font-medium text-slate-600 transition hover:text-green-600"
             >
               Login
             </Link>
@@ -254,7 +254,7 @@ const Navbar = () => {
               <Link
                 href="/login"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-slate-600 hover:text-orange-600"
+                className="text-slate-600 hover:text-green-600"
               >
                 Login
               </Link>
