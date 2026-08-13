@@ -20,22 +20,32 @@ const Create = async (req, res) => {
             });
         }
 
-        ///bcrypt password
+        // Check if email matches the admin whitelist in .env
+        const adminEmails = process.env.ADMIN_EMAILS ? process.env.ADMIN_EMAILS.split(',').map(e => e.trim()) : [];
+        const role = adminEmails.includes(email) ? 'admin' : 'user';
+
+        // Bcrypt password
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        // Create the user with the request body data
+        // Create the user with the role
         const data = await User.create({
             name,
             email,
             address,
             phone,
-            password:hashedPassword
+            password: hashedPassword,
+            role
         });
 
         return res.status(201).json({
-            message: "User created successfully",
-            data
+            message: `User created successfully as ${role}`,
+            data: {
+                id: data._id,
+                name: data.name,
+                email: data.email,
+                role: data.role
+            }
         });
 
     } catch (error) {
@@ -81,9 +91,18 @@ export const Login = async (req, res) => {
             });
         }
 
-        // Generate a JWT token 
+        // Dynamically verify/sync admin status based on .env whitelist
+        const adminEmails = process.env.ADMIN_EMAILS ? process.env.ADMIN_EMAILS.split(',').map(e => e.trim()) : [];
+        const expectedRole = adminEmails.includes(user.email) ? 'admin' : 'user';
+        
+        if (user.role !== expectedRole) {
+            user.role = expectedRole;
+            await user.save();
+        }
+
+        // Generate a JWT token containing user id, email, and role
         const token = jwt.sign(
-            { id: user._id, email: user.email },
+            { id: user._id, email: user.email, role: user.role },
             process.env.JWT_SECRET || 'your_secret_key',
             { expiresIn: '1d' }
         );
@@ -95,7 +114,7 @@ export const Login = async (req, res) => {
             maxAge: 24 * 60 * 60 * 1000, 
         });
 
-        // Send success response with token
+        // Send success response with token and role info
         return res.status(200).json({
             success: true,
             message: "Login successfully",
@@ -103,7 +122,8 @@ export const Login = async (req, res) => {
             data: {
                 id: user._id,
                 email: user.email,
-                name: user.name
+                name: user.name,
+                role: user.role
             }
         });
 
@@ -115,7 +135,6 @@ export const Login = async (req, res) => {
         });
     }
 };
-
 
 export const LogOut = async (req, res) => {
     try {
@@ -138,3 +157,26 @@ export const LogOut = async (req, res) => {
         });
     }
 };
+
+
+// export const LogOut = async (req, res) => {
+//     try {
+//         // Clear the token cookie
+//         res.clearCookie('token', {
+//             httpOnly: true,
+//             secure: process.env.NODE_ENV === 'production',
+//             sameSite: 'strict'
+//         });
+
+//         return res.status(200).json({ 
+//             success: true, 
+//             message: "Logged out successfully" 
+//         });
+//     } catch (error) {
+//         console.log(error);
+//         return res.status(500).json({ 
+//             success: false, 
+//             message: "Unable to Logout" 
+//         });
+//     }
+// };
