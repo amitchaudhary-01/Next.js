@@ -11,7 +11,7 @@ import toast from 'react-hot-toast'
 const validationSchema = z.object({
     name: z.string()
         .min(5, "Must contain at least 5 characters")
-        .max(12, "Must not be more than 12 characters"),
+        .max(25, "Must not be more than 25 characters"),
     phone: z.string()
         .min(10, "Must be 10 numbers")
         .regex(/^(98|97)/, "Phone number must start with 98 or 97"),
