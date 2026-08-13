@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Eye, EyeOff, Lock, Mail, ArrowRight } from "lucide-react";
-import { useRouter } from "next/navigation"; // Optional: for routing after login
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 export default function LoginPage() {
@@ -24,28 +24,36 @@ export default function LoginPage() {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include', // Important if your backend sets cookies
         body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
 
-if (response.ok && data.success) {
+      if (response.ok && data.success) {
         console.log("Login successful:", data);
-        toast.success("Login Successfully")
+        toast.success("Login Successfully");
         
-        // Save token to localStorage
+        // 1. Save token to localStorage
         localStorage.setItem('token', data.token); 
         
-        // Redirect to dashboard or home page
-        router.push('/');
+        // 2. Save complete user data (including role) to localStorage
+        localStorage.setItem('user', JSON.stringify(data.data)); 
+        
+        // 3. Smart Redirect: Send admins to dashboard, regular users to home
+        if (data.data.role === 'admin') {
+          router.push('/admin/dashboard');
+        } else {
+          router.push('/');
+        }
       
       } else {
         setErrorMessage(data.message || "Invalid email or password.");
-        toast.error("Invalid Email or password")
+        toast.error("Invalid Email or password");
       }
     } catch (error) {
       console.error("Login failed:", error);
-      toast.error("Login Failed")
+      toast.error("Login Failed");
       setErrorMessage("Something went wrong. Please check your connection.");
     } finally {
       setIsLoading(false);

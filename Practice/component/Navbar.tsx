@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { Home as HomeIcon, MapPin, Phone, Menu, X } from "lucide-react";
+import { Home as HomeIcon, MapPin, Phone, Menu, X, Shield, LogOut, LogIn } from "lucide-react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 // Custom SVG Icons for Social Media
 const FacebookIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -76,10 +78,40 @@ const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [user, setUser] = useState<{ name: string; email: string; role: string } | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     setIsMounted(true);
+    // Load user data from localStorage on mount
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (e) {
+        console.error("Failed to parse user from localStorage");
+      }
+    }
   }, []);
+
+  const handleLogout = async () => {
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/logout`, {
+        method: 'GET',
+        credentials: 'include',
+      });
+      
+      // Clear local storage items
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      setUser(null);
+      
+      toast.success("Logged out successfully");
+      router.push('/login');
+    } catch (error) {
+      toast.error("Logout failed");
+    }
+  };
 
   // Prevent server/client render mismatches during hydration
   if (!isMounted) {
@@ -101,14 +133,11 @@ const Navbar = () => {
         </div>
         <div className="flex items-center space-x-6">
           <span className="hidden sm:inline">Mon to Sat: 09:00 to 23:00</span>
-          <div className="hidden md:flex items-center space-x-3  ">
-            
-            <FacebookIcon
-              className="w-4 h-4 hover:text-orange-600 cursor-pointer rounded-full hover:text-black transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-[1px] shadow-sm "
-            />
-            <TwitterIcon className="w-4 h-4 hover:text-orange-600 cursor-pointer rounded-full hover:text-black transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-[1px] shadow-sm" />
-            <InstagramIcon className="w-4 h-4 hover:text-orange-600 cursor-pointer rounded-full hover:text-black transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-[1px] shadow-sm" />
-            <LinkedinIcon className="w-4 h-4 hover:text-orange-600 cursor-pointer rounded-full hover:text-black transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-[1px] shadow-sm" />
+          <div className="hidden md:flex items-center space-x-3">
+            <FacebookIcon className="w-4 h-4 hover:text-orange-600 cursor-pointer rounded-full transition-all duration-300 ease-in-out hover:scale-110 shadow-sm" />
+            <TwitterIcon className="w-4 h-4 hover:text-orange-600 cursor-pointer rounded-full transition-all duration-300 ease-in-out hover:scale-110 shadow-sm" />
+            <InstagramIcon className="w-4 h-4 hover:text-orange-600 cursor-pointer rounded-full transition-all duration-300 ease-in-out hover:scale-110 shadow-sm" />
+            <LinkedinIcon className="w-4 h-4 hover:text-orange-600 cursor-pointer rounded-full transition-all duration-300 ease-in-out hover:scale-110 shadow-sm" />
           </div>
         </div>
       </div>
@@ -127,74 +156,54 @@ const Navbar = () => {
           </Link>
 
           {/* Main Navigation Links (Desktop) */}
-        
+          <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-700">
+            <Link href="/" className="group relative py-2 transition-colors duration-300 hover:text-orange-600">
+              Home
+              <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-500 transition-all duration-300 ease-out group-hover:w-full" />
+            </Link>
+            <Link href="/getroom" className="group relative py-2 transition-colors duration-300 hover:text-orange-600">
+              Rooms
+              <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-500 transition-all duration-300 ease-out group-hover:w-full" />
+            </Link>
+            <Link href="/contact" className="group relative py-2 transition-colors duration-300 hover:text-orange-600">
+              Contact
+              <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-500 transition-all duration-300 ease-out group-hover:w-full" />
+            </Link>
+            <Link href="/about" className="group relative py-2 transition-colors duration-300 hover:text-orange-600">
+              About
+              <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-500 transition-all duration-300 ease-out group-hover:w-full" />
+            </Link>
+            <Link href="/news" className="group relative py-2 transition-colors duration-300 hover:text-orange-600">
+              News & Article
+              <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-500 transition-all duration-300 ease-out group-hover:w-full" />
+            </Link>
 
-
-<div className="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
-  <Link
-    href="/"
-    className="group relative py-2 transition-colors duration-300 text-orange-600 "
-  >
-    Home
-
-    <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-500 transition-all duration-300 ease-out group-hover:w-full" />
-  </Link>
-
-  <Link
-    href="/getroom"
-    className="group relative py-2 transition-colors duration-300 hover:text-orange-600"
-  >
-    Rooms
-
-    <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-500 transition-all duration-300 ease-out group-hover:w-full" />
-  </Link>
-
-  <Link
-    href="/contact"
-    className="group relative py-2 transition-colors duration-300 hover:text-orange-600"
-  >
-    Contact
-
-    <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-500 transition-all duration-300 ease-out group-hover:w-full" />
-  </Link>
-
-  <Link
-    href="/about"
-    className="group relative py-2 transition-colors duration-300 hover:text-orange-600"
-  >
-    About
-
-    <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-500 transition-all duration-300 ease-out group-hover:w-full" />
-  </Link>
-
-  <Link
-    href="/news"
-    className="group relative py-2 transition-colors duration-300 hover:text-orange-600"
-  >
-    News & Article
-
-    <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-500 transition-all duration-300 ease-out group-hover:w-full" />
-  </Link>
-</div>
-
-
-
-
+            {/* Admin Dashboard Link - Visible ONLY if user is admin */}
+            {user && user.role === 'admin' && (
+              <Link href="/admin/dashboard" className="group relative py-2 transition-colors duration-300 text-orange-700 font-semibold flex items-center gap-1">
+                <Shield className="w-4 h-4" /> Admin Dashboard
+                <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-600 transition-all duration-300 ease-out group-hover:w-full" />
+              </Link>
+            )}
+          </div>
 
           {/* Auth Actions (Desktop) */}
           <div className="hidden md:flex items-center gap-3 sm:gap-4">
-            <Link
-              href="/login"
-              className="text-sm font-medium text-slate-600 transition hover:text-green-600"
-            >
-              Login
-            </Link>
-            <Link
-              href="/login"
-              className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-3.5 py-2 text-sm font-medium text-rose-600 transition hover:bg-rose-500/20"
-            >
-              Logout
-            </Link>
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-3.5 py-2 text-sm font-medium text-rose-600 transition hover:bg-rose-500/20 flex items-center gap-1.5"
+              >
+                <LogOut className="w-4 h-4" /> Logout
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 flex items-center gap-1.5 shadow-sm"
+              >
+                <LogIn className="w-4 h-4" /> Login
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -203,11 +212,7 @@ const Navbar = () => {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="text-slate-700 focus:outline-none"
             >
-              {mobileMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
@@ -215,56 +220,45 @@ const Navbar = () => {
         {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-slate-200 pt-4 flex flex-col space-y-3 text-sm font-medium text-slate-700">
-            <Link
-              href="/"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-orange-600 transition"
-            >
+            <Link href="/" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-600">
               Home
             </Link>
-            <Link
-              href="/getroom"
-              onClick={() => setMobileMenuOpen(false)}
-              className="transition hover:text-orange-600"
-            >
+            <Link href="/getroom" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-600">
               Rooms
             </Link>
-            <Link
-              href="/contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="transition hover:text-orange-600"
-            >
+            <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-600">
               Contact
             </Link>
-            <Link
-              href="/about"
-              onClick={() => setMobileMenuOpen(false)}
-              className="transition hover:text-orange-600"
-            >
+            <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-600">
               About
             </Link>
-            <Link
-              href="/news"
-              onClick={() => setMobileMenuOpen(false)}
-              className="transition hover:text-orange-600"
-            >
+            <Link href="/news" onClick={() => setMobileMenuOpen(false)} className="transition hover:text-orange-600">
               News & Article
             </Link>
+
+            {user && user.role === 'admin' && (
+              <Link href="/admin/dashboard" onClick={() => setMobileMenuOpen(false)} className="text-orange-700 font-semibold flex items-center gap-1">
+                <Shield className="w-4 h-4" /> Admin Dashboard
+              </Link>
+            )}
+
             <div className="pt-2 flex items-center gap-3 border-t border-slate-200">
-              <Link
-                href="/login"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-slate-600 hover:text-green-600"
-              >
-                Login
-              </Link>
-              <Link
-                href="/login"
-                onClick={() => setMobileMenuOpen(false)}
-                className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-3.5 py-1.5 text-rose-600"
-              >
-                Logout
-              </Link>
+              {user ? (
+                <button
+                  onClick={() => { setMobileMenuOpen(false); handleLogout(); }}
+                  className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-3.5 py-1.5 text-rose-600 flex items-center gap-1"
+                >
+                  <LogOut className="w-4 h-4" /> Logout
+                </button>
+              ) : (
+                <Link
+                  href="/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="rounded-xl bg-blue-600 px-4 py-2 text-white flex items-center gap-1"
+                >
+                  <LogIn className="w-4 h-4" /> Login
+                </Link>
+              )}
             </div>
           </div>
         )}
