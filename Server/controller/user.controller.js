@@ -159,24 +159,19 @@ export const LogOut = async (req, res) => {
 };
 
 
-// export const LogOut = async (req, res) => {
-//     try {
-//         // Clear the token cookie
-//         res.clearCookie('token', {
-//             httpOnly: true,
-//             secure: process.env.NODE_ENV === 'production',
-//             sameSite: 'strict'
-//         });
+export const getuser = async (req, res) => {
+    try {
+        const data = await User.find().select("-password"); // Hide passwords for security
 
-//         return res.status(200).json({ 
-//             success: true, 
-//             message: "Logged out successfully" 
-//         });
-//     } catch (error) {
-//         console.log(error);
-//         return res.status(500).json({ 
-//             success: false, 
-//             message: "Unable to Logout" 
-//         });
-//     }
-// };
+        return res.status(200).json({
+            message: "User Fetch Successfully",
+            success: true,
+            data // <--  the array is sent here
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: "Internal Server Error",
+            success: false
+        });
+    }
+}
