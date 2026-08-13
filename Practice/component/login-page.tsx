@@ -41,11 +41,11 @@ export default function LoginPage() {
         localStorage.setItem('user', JSON.stringify(data.data)); 
         
         // 3. Smart Redirect: Send admins to dashboard, regular users to home
-        if (data.data.role === 'admin') {
-          router.push('/admin/dashboard');
-        } else {
+        // if (data.data.role === 'admin') {
+        //   router.push('/admin/dashboard');
+        // } else {
           router.push('/');
-        }
+        // }
       
       } else {
         setErrorMessage(data.message || "Invalid email or password.");
