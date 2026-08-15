@@ -37,27 +37,27 @@ const SettingsPage = (): React.JSX.Element => {
   };
 
   return (
-    <div className="p-8 text-slate-100 max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto space-y-8">
       {/* Header Section */}
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-white">Settings</h1>
-          <p className="text-sm text-slate-400 mt-1">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900">Settings</h1>
+          <p className="text-sm text-slate-500 mt-1">
             Manage system preferences, security controls, and application settings.
           </p>
         </div>
         <button
           onClick={handleSubmit}
-          className="flex items-center gap-2 bg-orange-600 hover:bg-orange-500 text-white px-4 py-2 rounded-xl font-medium transition shadow-lg shadow-orange-900/20 cursor-pointer"
+          className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all shadow-sm cursor-pointer"
         >
-          <Save size={18} />
+          <Save size={16} />
           Save Changes
         </button>
       </div>
 
       {/* Success Notification Banner */}
       {saved && (
-        <div className="mb-6 flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-4 py-3 rounded-xl">
+        <div className="flex items-center gap-3 bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-3 rounded-xl shadow-xs">
           <CheckCircle2 size={20} />
           <span className="text-sm font-medium">Settings updated successfully!</span>
         </div>
@@ -65,20 +65,20 @@ const SettingsPage = (): React.JSX.Element => {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* General Settings Card */}
-        <div className="bg-[#111827] border border-slate-800 rounded-2xl p-6 shadow-xl">
-          <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800">
-            <div className="p-2 bg-orange-600/10 text-orange-500 rounded-lg">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+            <div className="p-2 bg-orange-50 text-orange-600 rounded-xl">
               <Globe size={20} />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-white">General Configuration</h2>
-              <p className="text-xs text-slate-400">Basic details about your Veedoo platform instance.</p>
+              <h2 className="text-lg font-semibold text-slate-900">General Configuration</h2>
+              <p className="text-xs text-slate-500">Basic details about your Veedoo platform instance.</p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
                 Platform Name
               </label>
               <input
@@ -86,11 +86,11 @@ const SettingsPage = (): React.JSX.Element => {
                 name="siteName"
                 value={settings.siteName}
                 onChange={handleChange}
-                className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-orange-500 transition"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-orange-500 focus:bg-white transition"
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
                 Administrator Email
               </label>
               <input
@@ -98,15 +98,15 @@ const SettingsPage = (): React.JSX.Element => {
                 name="adminEmail"
                 value={settings.adminEmail}
                 onChange={handleChange}
-                className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-orange-500 transition"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-orange-500 focus:bg-white transition"
               />
             </div>
           </div>
 
-          <div className="mt-6 flex items-center justify-between pt-4 border-t border-slate-800/60">
+          <div className="mt-6 flex items-center justify-between pt-4 border-t border-slate-100">
             <div>
-              <span className="text-sm font-medium text-white block">Maintenance Mode</span>
-              <span className="text-xs text-slate-400">Temporarily disable public access for system upgrades.</span>
+              <span className="text-sm font-medium text-slate-900 block">Maintenance Mode</span>
+              <span className="text-xs text-slate-500">Temporarily disable public access for system upgrades.</span>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
               <input
@@ -116,28 +116,28 @@ const SettingsPage = (): React.JSX.Element => {
                 onChange={handleChange}
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-600"></div>
+              <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-600"></div>
             </label>
           </div>
         </div>
 
         {/* Security & Access Card */}
-        <div className="bg-[#111827] border border-slate-800 rounded-2xl p-6 shadow-xl">
-          <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800">
-            <div className="p-2 bg-orange-600/10 text-orange-500 rounded-lg">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+            <div className="p-2 bg-orange-50 text-orange-600 rounded-xl">
               <Shield size={20} />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-white">Security & Access</h2>
-              <p className="text-xs text-slate-400">Manage guard policies, authentication, and security parameters.</p>
+              <h2 className="text-lg font-semibold text-slate-900">Security & Access</h2>
+              <p className="text-xs text-slate-500">Manage guard policies, authentication, and security parameters.</p>
             </div>
           </div>
 
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-sm font-medium text-white block">Two-Factor Authentication (2FA)</span>
-                <span className="text-xs text-slate-400">Require an extra security layer for administrator logins.</span>
+                <span className="text-sm font-medium text-slate-900 block">Two-Factor Authentication (2FA)</span>
+                <span className="text-xs text-slate-500">Require an extra security layer for administrator logins.</span>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
@@ -147,20 +147,20 @@ const SettingsPage = (): React.JSX.Element => {
                   onChange={handleChange}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-600"></div>
+                <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-600"></div>
               </label>
             </div>
 
-            <div className="pt-4 border-t border-slate-800/60 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="pt-4 border-t border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <span className="text-sm font-medium text-white block">Session Timeout (Minutes)</span>
-                <span className="text-xs text-slate-400">Automatic logout duration for inactive admin sessions.</span>
+                <span className="text-sm font-medium text-slate-900 block">Session Timeout (Minutes)</span>
+                <span className="text-xs text-slate-500">Automatic logout duration for inactive admin sessions.</span>
               </div>
               <select
                 name="sessionTimeout"
                 value={settings.sessionTimeout}
                 onChange={handleChange}
-                className="bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-sm text-slate-200 focus:outline-none focus:border-orange-500 transition w-full md:w-48 cursor-pointer"
+                className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-900 focus:outline-none focus:border-orange-500 focus:bg-white transition w-full md:w-48 cursor-pointer"
               >
                 <option value="15">15 Minutes</option>
                 <option value="30">30 Minutes</option>
@@ -172,21 +172,21 @@ const SettingsPage = (): React.JSX.Element => {
         </div>
 
         {/* Notifications Card */}
-        <div className="bg-[#111827] border border-slate-800 rounded-2xl p-6 shadow-xl">
-          <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800">
-            <div className="p-2 bg-orange-600/10 text-orange-500 rounded-lg">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+            <div className="p-2 bg-orange-50 text-orange-600 rounded-xl">
               <Bell size={20} />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-white">System Notifications</h2>
-              <p className="text-xs text-slate-400">Configure real-time alerts and trigger emails.</p>
+              <h2 className="text-lg font-semibold text-slate-900">System Notifications</h2>
+              <p className="text-xs text-slate-500">Configure real-time alerts and trigger emails.</p>
             </div>
           </div>
 
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-sm font-medium text-white block">Email Alerts for New Registrations</span>
-              <span className="text-xs text-slate-400">Receive an email notification whenever a new user registers.</span>
+              <span className="text-sm font-medium text-slate-900 block">Email Alerts for New Registrations</span>
+              <span className="text-xs text-slate-500">Receive an email notification whenever a new user registers.</span>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
               <input
@@ -196,7 +196,7 @@ const SettingsPage = (): React.JSX.Element => {
                 onChange={handleChange}
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-600"></div>
+              <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-600"></div>
             </label>
           </div>
         </div>
