@@ -58,18 +58,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   ];
 
   return (
-    <div className="min-h-screen bg-[#0b0f19] text-gray-100 flex">
+    <div className="min-h-screen bg-slate-50 text-slate-800 flex">
       
       {/* Sidebar for Desktop */}
-      <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-[#111827] border-r border-gray-800 transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="flex items-center justify-between h-16 px-6 border-b border-gray-800">
+      <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="flex items-center justify-between h-16 px-6 border-b border-slate-200">
           <div className="flex items-center gap-2">
-            <div className="bg-orange-600 p-2 rounded-xl text-white">
+            <div className="bg-orange-600 p-2 rounded-xl text-white shadow-sm">
               <ShieldCheck className="w-5 h-5" />
             </div>
-            <span className="font-bold text-lg tracking-wide text-white">Veedoo Admin</span>
+            <span className="font-bold text-lg tracking-wide text-slate-900">Veedoo Admin</span>
           </div>
-          <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-gray-400 hover:text-white">
+          <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-slate-400 hover:text-slate-700 cursor-pointer">
             <X className="w-6 h-6" />
           </button>
         </div>
@@ -85,8 +85,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 href={link.href}
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                   isActive 
-                    ? 'bg-orange-600 text-white shadow-lg shadow-orange-600/20' 
-                    : 'text-gray-400 hover:bg-gray-800/60 hover:text-white'
+                    ? 'bg-orange-600 text-white shadow-md shadow-orange-600/10' 
+                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                 }`}
               >
                 <Icon className="w-5 h-5" />
@@ -97,10 +97,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </nav>
 
         {/* Sidebar Footer / Logout */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-800">
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-slate-200 bg-white">
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:bg-red-500/10 transition-all"
+            className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50 transition-all cursor-pointer"
           >
             <LogOut className="w-5 h-5" />
             Sign Out
@@ -112,29 +112,29 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <div className="flex-1 flex flex-col lg:pl-64">
         
         {/* Top Header */}
-        <header className="h-16 bg-[#111827]/80 backdrop-blur-md border-b border-gray-800 sticky top-0 z-40 flex items-center justify-between px-6">
+        <header className="h-16 bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 flex items-center justify-between px-6 shadow-xs">
           <button 
             onClick={() => setSidebarOpen(true)} 
-            className="lg:hidden text-gray-400 hover:text-white p-2"
+            className="lg:hidden text-slate-600 hover:text-slate-900 p-2 cursor-pointer"
           >
             <Menu className="w-6 h-6" />
           </button>
           <div className="hidden lg:block">
-            <h1 className="text-sm font-semibold text-gray-300">Control Center</h1>
+            <h1 className="text-sm font-semibold text-slate-700">Control Center</h1>
           </div>
           <div className="flex items-center gap-3">
             <div className="text-right">
-              <p className="text-xs text-gray-400">Logged in as</p>
-              <p className="text-sm font-bold text-white">{adminName}</p>
+              <p className="text-xs text-slate-400">Logged in as</p>
+              <p className="text-sm font-bold text-slate-900">{adminName}</p>
             </div>
-            <div className="h-9 w-9 rounded-full bg-orange-600/20 border border-orange-500/30 flex items-center justify-center text-orange-400 font-bold">
+            <div className="h-9 w-9 rounded-full bg-orange-100 border border-orange-200 flex items-center justify-center text-orange-600 font-bold shadow-xs">
               {adminName.charAt(0).toUpperCase()}
             </div>
           </div>
         </header>
 
         {/* Page Content View */}
-        <main className="flex-1 p-6 md:p-10">
+        <main className="flex-1 p-6 md:p-10 bg-slate-50">
           {children}
         </main>
       </div>

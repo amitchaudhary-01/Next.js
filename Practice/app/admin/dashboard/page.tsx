@@ -85,15 +85,15 @@ export default function AdminDashboardPage() {
     <div className="max-w-7xl mx-auto space-y-8">
       
       {/* Header Info */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-gray-800/50 border border-gray-700/60 p-6 rounded-2xl">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
         <div>
-          <h2 className="text-2xl font-bold text-white">System Overview</h2>
-          <p className="text-sm text-gray-400">Monitor active users and database records.</p>
+          <h2 className="text-2xl font-bold text-slate-900">System Overview</h2>
+          <p className="text-sm text-slate-500">Monitor active users and database records.</p>
         </div>
         <button 
           onClick={fetchUsers}
           disabled={fetchingUsers}
-          className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all"
+          className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all shadow-sm cursor-pointer"
         >
           <RefreshCw className={`w-4 h-4 ${fetchingUsers ? 'animate-spin' : ''}`} />
           Refresh Data
@@ -102,56 +102,56 @@ export default function AdminDashboardPage() {
 
       {/* Metrics Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div className="bg-gray-800/50 border border-gray-700/60 p-6 rounded-2xl">
-          <div className="flex justify-between items-center text-gray-400">
+        <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
+          <div className="flex justify-between items-center text-slate-500">
             <span className="text-sm font-medium">Total Registered Users</span>
-            <Users className="w-5 h-5 text-blue-400" />
+            <Users className="w-5 h-5 text-orange-600" />
           </div>
-          <p className="text-3xl font-bold text-white mt-4">{usersList.length}</p>
-          <span className="text-xs text-emerald-400 font-medium mt-2 inline-block">Active database records</span>
+          <p className="text-3xl font-bold text-slate-900 mt-4">{usersList.length}</p>
+          <span className="text-xs text-emerald-600 font-semibold mt-2 inline-block">Active database records</span>
         </div>
 
-        <div className="bg-gray-800/50 border border-gray-700/60 p-6 rounded-2xl">
-          <div className="flex justify-between items-center text-gray-400">
+        <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
+          <div className="flex justify-between items-center text-slate-500">
             <span className="text-sm font-medium">Security Status</span>
-            <TrendingUp className="w-5 h-5 text-emerald-400" />
+            <TrendingUp className="w-5 h-5 text-emerald-600" />
           </div>
-          <p className="text-3xl font-bold text-emerald-400 mt-4">Protected</p>
-          <span className="text-xs text-gray-400 font-medium mt-2 inline-block">Middleware guard active</span>
+          <p className="text-3xl font-bold text-emerald-600 mt-4">Protected</p>
+          <span className="text-xs text-slate-500 font-medium mt-2 inline-block">Middleware guard active</span>
         </div>
       </div>
 
       {/* User Table Grid */}
-      <div className="bg-gray-800/50 border border-gray-700/60 rounded-2xl p-6 overflow-hidden">
-        <h3 className="text-lg font-bold text-white mb-4">User Directory</h3>
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm overflow-hidden">
+        <h3 className="text-lg font-bold text-slate-900 mb-4">User Directory</h3>
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-gray-300">
-            <thead className="bg-gray-900/60 text-gray-400 uppercase text-xs">
+          <table className="w-full text-left text-sm text-slate-600">
+            <thead className="bg-slate-50 text-slate-500 uppercase text-xs border-b border-slate-200">
               <tr>
-                <th className="px-4 py-3">Name</th>
-                <th className="px-4 py-3">Email</th>
-                <th className="px-4 py-3">Role</th>
-                <th className="px-4 py-3 text-right">Actions</th>
+                <th className="px-4 py-3 font-semibold">Name</th>
+                <th className="px-4 py-3 font-semibold">Email</th>
+                <th className="px-4 py-3 font-semibold">Role</th>
+                <th className="px-4 py-3 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-700/60">
+            <tbody className="divide-y divide-slate-100">
               {usersList.map((usr, i) => (
-                <tr key={usr._id || i} className="hover:bg-gray-750/30">
-                  <td className="px-4 py-3 font-medium text-white flex items-center gap-2">
-                    <UserCheck className="w-4 h-4 text-orange-500 shrink-0" />
+                <tr key={usr._id || i} className="hover:bg-slate-50/80 transition-colors">
+                  <td className="px-4 py-3 font-medium text-slate-900 flex items-center gap-2">
+                    <UserCheck className="w-4 h-4 text-orange-600 shrink-0" />
                     {usr.name || 'N/A'}
                   </td>
-                  <td className="px-4 py-3 text-gray-300">
+                  <td className="px-4 py-3 text-slate-600">
                     <div className="flex items-center gap-2">
-                      <Mail className="w-4 h-4 text-gray-400 shrink-0" />
+                      <Mail className="w-4 h-4 text-slate-400 shrink-0" />
                       {usr.email}
                     </div>
                   </td>
                   <td className="px-4 py-3">
                     <span className={`px-2.5 py-1 text-xs font-semibold rounded-full ${
                       usr.role === 'admin' 
-                        ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20' 
-                        : 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                        ? 'bg-orange-50 text-orange-700 border border-orange-200' 
+                        : 'bg-blue-50 text-blue-700 border border-blue-200'
                     }`}>
                       {usr.role}
                     </span>
@@ -160,11 +160,11 @@ export default function AdminDashboardPage() {
                     <button
                       onClick={() => handleDeleteUser(usr._id)}
                       disabled={actionLoadingId === usr._id}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 rounded-lg text-xs font-medium transition-all disabled:opacity-50"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 rounded-lg text-xs font-medium transition-all disabled:opacity-50 cursor-pointer"
                       title="Delete User"
                     >
                       {actionLoadingId === usr._id ? (
-                        <div className="w-3.5 h-3.5 animate-spin rounded-full border-2 border-red-400 border-t-transparent" />
+                        <div className="w-3.5 h-3.5 animate-spin rounded-full border-2 border-red-600 border-t-transparent" />
                       ) : (
                         <Trash2 className="w-3.5 h-3.5" />
                       )}
