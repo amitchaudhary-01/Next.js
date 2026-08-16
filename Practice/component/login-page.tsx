@@ -1,17 +1,22 @@
 'use client';
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { Eye, EyeOff, Lock, Mail, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
@@ -24,15 +29,14 @@ export default function LoginPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include', // Important if your backend sets cookies
-        body: JSON.stringify({ email, password }),
+        credentials: 'include',
+        body: JSON.stringify(formData),
       });
 
       const data = await response.json();
 
       if (response.ok && data.success) {
-        console.log("Login successful:", data);
-        toast.success("Login Successfully");
+        toast.success("Login Successful");
         
         // 1. Save token to localStorage
         localStorage.setItem('token', data.token); 
@@ -41,15 +45,15 @@ export default function LoginPage() {
         localStorage.setItem('user', JSON.stringify(data.data)); 
         
         // 3. Smart Redirect: Send admins to dashboard, regular users to home
-        // if (data.data.role === 'admin') {
-        //   router.push('/admin/dashboard');
-        // } else {
+        if (data.data?.role === 'admin') {
+          router.push('/admin/dashboard');
+        } else {
           router.push('/');
-        // }
-      
+        }
       } else {
-        setErrorMessage(data.message || "Invalid email or password.");
-        toast.error("Invalid Email or password");
+        const errorMsg = data.message || "Invalid email or password.";
+        setErrorMessage(errorMsg);
+        toast.error(errorMsg);
       }
     } catch (error) {
       console.error("Login failed:", error);
@@ -58,18 +62,6 @@ export default function LoginPage() {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setPassword(e.target.value);
-  };
-
-  const toggleShowPassword = (): void => {
-    setShowPassword((prev) => !prev);
   };
 
   return (
@@ -102,7 +94,7 @@ export default function LoginPage() {
             
             {/* Email Field */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-gray-600">
+              <label htmlFor="email" className="block text-xs font-semibold uppercase tracking-wider text-gray-600">
                 Email Address
               </label>
               <div className="relative mt-1">
@@ -110,9 +102,11 @@ export default function LoginPage() {
                   <Mail className="h-5 w-5" />
                 </div>
                 <input
+                  id="email"
+                  name="email"
                   type="email"
-                  value={email}
-                  onChange={handleEmailChange}
+                  value={formData.email}
+                  onChange={handleChange}
                   required
                   className="w-full rounded-xl border border-gray-200 bg-gray-50/50 py-3 pl-10 pr-4 text-sm text-gray-950 placeholder-gray-400 transition-all focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-500/10"
                   placeholder="name@example.com"
@@ -123,38 +117,37 @@ export default function LoginPage() {
             {/* Password Field */}
             <div>
               <div className="flex items-center justify-between">
-                <label className="block text-xs font-semibold uppercase tracking-wider text-gray-600">
+                <label htmlFor="password" className="block text-xs font-semibold uppercase tracking-wider text-gray-600">
                   Password
                 </label>
-                <a
-                  href="#forgot-password"
+                <Link
+                  href="/forgot-password"
                   className="text-xs font-medium text-blue-600 hover:text-blue-500 transition-colors"
                 >
                   Forgot password?
-                </a>
+                </Link>
               </div>
               <div className="relative mt-1">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
                   <Lock className="h-5 w-5" />
                 </div>
                 <input
+                  id="password"
+                  name="password"
                   type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={handlePasswordChange}
+                  value={formData.password}
+                  onChange={handleChange}
                   required
                   className="w-full rounded-xl border border-gray-200 bg-gray-50/50 py-3 pl-10 pr-12 text-sm text-gray-950 placeholder-gray-400 transition-all focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-500/10"
                   placeholder="••••••••"
                 />
                 <button
                   type="button"
-                  onClick={toggleShowPassword}
+                  onClick={() => setShowPassword((prev) => !prev)}
                   className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 transition-colors"
+                  aria-label="Toggle password visibility"
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5" />
-                  ) : (
-                    <Eye className="h-5 w-5" />
-                  )}
+                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
               </div>
             </div>
@@ -191,12 +184,12 @@ export default function LoginPage() {
         {/* Footer Link */}
         <p className="text-center text-sm text-gray-500">
           Don't have an account?{" "}
-          <a
+          <Link
             href="/register"
             className="font-medium text-blue-600 hover:text-blue-500 transition-colors"
           >
             Sign up for free
-          </a>
+          </Link>
         </p>
       </div>
     </div>
