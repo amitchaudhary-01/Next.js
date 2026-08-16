@@ -6,12 +6,23 @@ import {
   Shield, 
   Bell, 
   Globe, 
-  CheckCircle2
+  CheckCircle2,
+  Loader2
 } from 'lucide-react';
+import toast from 'react-hot-toast';
+
+interface SettingsState {
+  siteName: string;
+  adminEmail: string;
+  maintenanceMode: boolean;
+  emailAlerts: boolean;
+  twoFactorAuth: boolean;
+  sessionTimeout: string;
+}
 
 const SettingsPage = (): React.JSX.Element => {
-  const [saved, setSaved] = useState<boolean>(false);
-  const [settings, setSettings] = useState({
+  const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [settings, setSettings] = useState<SettingsState>({
     siteName: 'Veedoo Admin',
     adminEmail: 'admin@veedoo.com',
     maintenanceMode: false,
@@ -30,10 +41,19 @@ const SettingsPage = (): React.JSX.Element => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+    setIsSaving(true);
+
+    // Simulate API request or connect your backend endpoint here
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 800));
+      toast.success("Settings updated successfully!");
+    } catch (error) {
+      toast.error("Failed to update settings");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -48,26 +68,23 @@ const SettingsPage = (): React.JSX.Element => {
         </div>
         <button
           onClick={handleSubmit}
-          className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all shadow-sm cursor-pointer"
+          disabled={isSaving}
+          className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold px-5 py-2.5 rounded-xl transition-all shadow-sm disabled:opacity-50 cursor-pointer"
         >
-          <Save size={16} />
-          Save Changes
+          {isSaving ? (
+            <Loader2 className="w-4 h-4 animate-spin" />
+          ) : (
+            <Save size={16} />
+          )}
+          {isSaving ? 'Saving Changes...' : 'Save Changes'}
         </button>
       </div>
-
-      {/* Success Notification Banner */}
-      {saved && (
-        <div className="flex items-center gap-3 bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-3 rounded-xl shadow-xs">
-          <CheckCircle2 size={20} />
-          <span className="text-sm font-medium">Settings updated successfully!</span>
-        </div>
-      )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* General Settings Card */}
         <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
           <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
-            <div className="p-2 bg-orange-50 text-orange-600 rounded-xl">
+            <div className="p-2.5 bg-orange-50 text-orange-600 rounded-xl">
               <Globe size={20} />
             </div>
             <div>
@@ -86,7 +103,8 @@ const SettingsPage = (): React.JSX.Element => {
                 name="siteName"
                 value={settings.siteName}
                 onChange={handleChange}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-orange-500 focus:bg-white transition"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 focus:bg-white transition"
+                required
               />
             </div>
             <div>
@@ -98,14 +116,15 @@ const SettingsPage = (): React.JSX.Element => {
                 name="adminEmail"
                 value={settings.adminEmail}
                 onChange={handleChange}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-orange-500 focus:bg-white transition"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 focus:bg-white transition"
+                required
               />
             </div>
           </div>
 
-          <div className="mt-6 flex items-center justify-between pt-4 border-t border-slate-100">
+          <div className="mt-6 flex items-center justify-between pt-5 border-t border-slate-100">
             <div>
-              <span className="text-sm font-medium text-slate-900 block">Maintenance Mode</span>
+              <span className="text-sm font-semibold text-slate-900 block">Maintenance Mode</span>
               <span className="text-xs text-slate-500">Temporarily disable public access for system upgrades.</span>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
@@ -124,7 +143,7 @@ const SettingsPage = (): React.JSX.Element => {
         {/* Security & Access Card */}
         <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
           <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
-            <div className="p-2 bg-orange-50 text-orange-600 rounded-xl">
+            <div className="p-2.5 bg-orange-50 text-orange-600 rounded-xl">
               <Shield size={20} />
             </div>
             <div>
@@ -136,7 +155,7 @@ const SettingsPage = (): React.JSX.Element => {
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-sm font-medium text-slate-900 block">Two-Factor Authentication (2FA)</span>
+                <span className="text-sm font-semibold text-slate-900 block">Two-Factor Authentication (2FA)</span>
                 <span className="text-xs text-slate-500">Require an extra security layer for administrator logins.</span>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
@@ -151,16 +170,16 @@ const SettingsPage = (): React.JSX.Element => {
               </label>
             </div>
 
-            <div className="pt-4 border-t border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="pt-5 border-t border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <span className="text-sm font-medium text-slate-900 block">Session Timeout (Minutes)</span>
+                <span className="text-sm font-semibold text-slate-900 block">Session Timeout (Minutes)</span>
                 <span className="text-xs text-slate-500">Automatic logout duration for inactive admin sessions.</span>
               </div>
               <select
                 name="sessionTimeout"
                 value={settings.sessionTimeout}
                 onChange={handleChange}
-                className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-900 focus:outline-none focus:border-orange-500 focus:bg-white transition w-full md:w-48 cursor-pointer"
+                className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 focus:bg-white transition w-full md:w-48 cursor-pointer"
               >
                 <option value="15">15 Minutes</option>
                 <option value="30">30 Minutes</option>
@@ -174,7 +193,7 @@ const SettingsPage = (): React.JSX.Element => {
         {/* Notifications Card */}
         <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
           <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
-            <div className="p-2 bg-orange-50 text-orange-600 rounded-xl">
+            <div className="p-2.5 bg-orange-50 text-orange-600 rounded-xl">
               <Bell size={20} />
             </div>
             <div>
@@ -185,7 +204,7 @@ const SettingsPage = (): React.JSX.Element => {
 
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-sm font-medium text-slate-900 block">Email Alerts for New Registrations</span>
+              <span className="text-sm font-semibold text-slate-900 block">Email Alerts for New Registrations</span>
               <span className="text-xs text-slate-500">Receive an email notification whenever a new user registers.</span>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
