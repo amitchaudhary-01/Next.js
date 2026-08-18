@@ -28,9 +28,9 @@ export default function PropertyCategories({ categories, onCategoryClick }: Prop
             data-aos="zoom-in"
             data-aos-delay={idx * 100}
             onClick={() => onCategoryClick && onCategoryClick(cat.name)}
-            className="bg-[#1f2937] border border-gray-800 hover:border-orange-500 p-6 rounded-2xl text-center transition cursor-pointer group"
+            className="bg-gray-300 border border-gray-800 hover:border-orange-500 p-6 rounded-2xl text-center transition cursor-pointer group"
           >
-            <div className="w-12 h-12 bg-[#111827] rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+            <div className="w-12 h-12 bg-blue-300 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
               {cat.icon}
             </div>
             <h3 className="font-bold text-white text-sm">{cat.name}</h3>
