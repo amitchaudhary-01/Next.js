@@ -37,7 +37,7 @@ const Footer = () => {
         
         {/* Brand & Socials Section */}
         <div className="md:col-span-2 space-y-4">
-          <h3 className="text-2xl font-black text-white tracking-wide">Veedoo</h3>
+          <h3 className="text-2xl font-black text-orange-600 tracking-wide">Veedoo</h3>
           <p className="text-xs text-gray-400 max-w-sm leading-relaxed">
             Veedoo is an innovative real estate platform designed to help you find your dream properties, commercial spaces, and luxury homes effortlessly.
           </p>
@@ -63,7 +63,7 @@ const Footer = () => {
 
         {/* Quick Links Section */}
         <div>
-          <h4 className="font-bold text-white text-sm mb-4">Quick Links</h4>
+          <h4 className="font-bold text-orange-600 text-sm mb-4">Quick Links</h4>
           <ul className="space-y-2 text-xs text-gray-400">
             {quickLinks.map((link) => (
               <li key={link.label}>
@@ -77,7 +77,7 @@ const Footer = () => {
 
         {/* Property Types Section */}
         <div>
-          <h4 className="font-bold text-white text-sm mb-4">Property Types</h4>
+          <h4 className="font-bold text-orange-600 text-sm mb-4">Property Types</h4>
           <ul className="space-y-2 text-xs text-gray-400">
             {propertyTypes.map((prop) => (
               <li key={prop.label}>
