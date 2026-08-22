@@ -19,4 +19,12 @@ router.get('/admin/dashboard', verifyAdmin, (req, res) => {
     });
 });
 
+router.get('/admin/users', verifyAdmin, (req,res) =>{
+    return res.status(200).json({
+        success: true,
+        message:"manage Users",
+        adminData: req.user
+    })
+})
+
 export default router;

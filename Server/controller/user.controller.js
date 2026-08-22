@@ -159,19 +159,38 @@ export const LogOut = async (req, res) => {
 };
 
 
-export const getuser = async (req, res) => {
-    try {
-        const data = await User.find().select("-password"); // Hide passwords for security
+// export const getuser = async (req, res) => {
+//     try {
+//         const data = await User.find().select("-password"); // Hide passwords for security
 
-        return res.status(200).json({
-            message: "User Fetch Successfully",
-            success: true,
-            data // <--  the array is sent here
-        });
-    } catch (error) {
-        return res.status(500).json({
-            message: "Internal Server Error",
-            success: false
-        });
-    }
-}
+//         return res.status(200).json({
+//             message: "User Fetch Successfully",
+//             success: true,
+//             data // <--  the array is sent here
+//         });
+//     } catch (error) {
+//         return res.status(500).json({
+//             message: "Internal Server Error",
+//             success: false
+//         });
+//     }
+// }
+
+
+export const getuser = async (req, res) => {
+  try {
+    const users = await User.find().select("-password");
+
+    return res.status(200).json({
+      success: true,
+      users,
+    });
+  } catch (error) {
+    console.error("Get users error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch users",
+    });
+  }
+};

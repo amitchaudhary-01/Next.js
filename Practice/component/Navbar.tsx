@@ -334,7 +334,7 @@ const Navbar = () => {
               </Link>
 
               {/* Admin Dashboard */}
-              {user?.role === "admin" && (
+              {/* {user?.role === "admin" && (
                 <Link
                   href="/admin/dashboard"
                   onClick={() => setMobileMenuOpen(false)}
@@ -343,7 +343,7 @@ const Navbar = () => {
                   <Shield className="h-4 w-4" />
                   Admin Dashboard
                 </Link>
-              )}
+              )} */}
 
               {/* Mobile Authentication */}
               <div className="mt-2 border-t border-slate-200 pt-3">
