@@ -23,7 +23,7 @@ export const verifyAdmin = (req, res, next) => {
     }
 
     // 4. Verify token and decode user data
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your_secret_key');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'room_rental_super_secret_8f3a9c2e1b7d');
     req.user = decoded;
 
     // 5. Check if the user has the admin role
