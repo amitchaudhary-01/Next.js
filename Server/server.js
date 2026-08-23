@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser';
 import UserRoute from './routes/user.route.js';
 import RoomRoute from './routes/room.route.js';
 import NewsRoute from './routes/news.route.js';
+import SettingsRoutes from './routes/setting.routes.js'
 
 const app = express();
 
@@ -35,6 +36,8 @@ app.use('/api/v1/user', UserRoute);
 app.use('/api/v1/room', RoomRoute);
 
 app.use('/api/v1/news', NewsRoute);
+
+app.use('/api/v1/settings', SettingsRoutes);
 
 const PORT = process.env.PORT || 5000;
 

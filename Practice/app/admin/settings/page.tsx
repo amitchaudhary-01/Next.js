@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Save, 
   Shield, 
   Bell, 
   Globe, 
-  Loader2
+  Loader2,
+  RefreshCw
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -20,15 +21,53 @@ interface SettingsState {
 }
 
 const SettingsPage = (): React.JSX.Element => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [settings, setSettings] = useState<SettingsState>({
-    siteName: 'Veedoo Admin',
-    adminEmail: 'admin@veedoo.com',
+    siteName: '',
+    adminEmail: '',
     maintenanceMode: false,
     emailAlerts: true,
     twoFactorAuth: true,
     sessionTimeout: '30',
   });
+
+  // Fetch settings from the backend when component mounts
+  const fetchSettings = async () => {
+    try {
+      setIsLoading(true);
+      const token = localStorage.getItem("token");
+      
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/settings`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        credentials: "include",
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to fetch settings");
+      }
+
+      // Assuming your API returns the settings object inside data.settings or data
+      if (data.settings || data.data) {
+        setSettings(data.settings || data.data);
+      }
+    } catch (error) {
+      console.error("Fetch settings error:", error);
+      toast.error(error instanceof Error ? error.message : "Failed to load settings");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchSettings();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -40,19 +79,49 @@ const SettingsPage = (): React.JSX.Element => {
     }));
   };
 
+  // Submit/Save settings to the backend
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/settings`, {
+        method: "PUT", // or "PATCH" depending on your backend API route
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify(settings),
+        credentials: "include",
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || data.success === false) {
+        throw new Error(data.message || "Failed to update settings");
+      }
+
       toast.success("Settings updated successfully!");
     } catch (error) {
-      toast.error("Failed to update settings");
+      console.error("Save settings error:", error);
+      toast.error(error instanceof Error ? error.message : "Failed to update settings");
     } finally {
       setIsSaving(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-[400px] items-center justify-center p-4">
+        <div className="text-center">
+          <RefreshCw className="mx-auto mb-3 h-8 w-8 animate-spin text-orange-600" />
+          <p className="text-sm text-slate-500">Loading settings...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8 p-4 sm:p-6">
