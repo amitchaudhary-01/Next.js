@@ -6,7 +6,6 @@ import {
   Shield, 
   Bell, 
   Globe, 
-  CheckCircle2,
   Loader2
 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -45,7 +44,6 @@ const SettingsPage = (): React.JSX.Element => {
     e.preventDefault();
     setIsSaving(true);
 
-    // Simulate API request or connect your backend endpoint here
     try {
       await new Promise((resolve) => setTimeout(resolve, 800));
       toast.success("Settings updated successfully!");
@@ -57,19 +55,19 @@ const SettingsPage = (): React.JSX.Element => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8">
+    <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8 p-4 sm:p-6">
       {/* Header Section */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white border border-slate-200 p-4 sm:p-6 rounded-2xl shadow-xs">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">Settings</h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">Settings</h1>
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
             Manage system preferences, security controls, and application settings.
           </p>
         </div>
         <button
           onClick={handleSubmit}
           disabled={isSaving}
-          className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold px-5 py-2.5 rounded-xl transition-all shadow-sm disabled:opacity-50 cursor-pointer"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold px-5 py-2.5 rounded-xl transition-all shadow-xs disabled:opacity-50 cursor-pointer"
         >
           {isSaving ? (
             <Loader2 className="w-4 h-4 animate-spin" />
@@ -82,18 +80,18 @@ const SettingsPage = (): React.JSX.Element => {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* General Settings Card */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-xs">
           <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
-            <div className="p-2.5 bg-orange-50 text-orange-600 rounded-xl">
+            <div className="p-2.5 bg-orange-50 text-orange-600 rounded-xl shrink-0">
               <Globe size={20} />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-slate-900">General Configuration</h2>
+              <h2 className="text-base sm:text-lg font-semibold text-slate-900">General Configuration</h2>
               <p className="text-xs text-slate-500">Basic details about your Veedoo platform instance.</p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
                 Platform Name
@@ -122,12 +120,12 @@ const SettingsPage = (): React.JSX.Element => {
             </div>
           </div>
 
-          <div className="mt-6 flex items-center justify-between pt-5 border-t border-slate-100">
-            <div>
+          <div className="mt-6 flex items-center justify-between pt-5 border-t border-slate-100 gap-4">
+            <div className="pr-4">
               <span className="text-sm font-semibold text-slate-900 block">Maintenance Mode</span>
               <span className="text-xs text-slate-500">Temporarily disable public access for system upgrades.</span>
             </div>
-            <label className="relative inline-flex items-center cursor-pointer">
+            <label className="relative inline-flex items-center cursor-pointer shrink-0">
               <input
                 type="checkbox"
                 name="maintenanceMode"
@@ -141,24 +139,24 @@ const SettingsPage = (): React.JSX.Element => {
         </div>
 
         {/* Security & Access Card */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-xs">
           <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
-            <div className="p-2.5 bg-orange-50 text-orange-600 rounded-xl">
+            <div className="p-2.5 bg-orange-50 text-orange-600 rounded-xl shrink-0">
               <Shield size={20} />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-slate-900">Security & Access</h2>
+              <h2 className="text-base sm:text-lg font-semibold text-slate-900">Security & Access</h2>
               <p className="text-xs text-slate-500">Manage guard policies, authentication, and security parameters.</p>
             </div>
           </div>
 
           <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <div>
+            <div className="flex items-center justify-between gap-4">
+              <div className="pr-4">
                 <span className="text-sm font-semibold text-slate-900 block">Two-Factor Authentication (2FA)</span>
                 <span className="text-xs text-slate-500">Require an extra security layer for administrator logins.</span>
               </div>
-              <label className="relative inline-flex items-center cursor-pointer">
+              <label className="relative inline-flex items-center cursor-pointer shrink-0">
                 <input
                   type="checkbox"
                   name="twoFactorAuth"
@@ -191,23 +189,23 @@ const SettingsPage = (): React.JSX.Element => {
         </div>
 
         {/* Notifications Card */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-xs">
           <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
-            <div className="p-2.5 bg-orange-50 text-orange-600 rounded-xl">
+            <div className="p-2.5 bg-orange-50 text-orange-600 rounded-xl shrink-0">
               <Bell size={20} />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-slate-900">System Notifications</h2>
+              <h2 className="text-base sm:text-lg font-semibold text-slate-900">System Notifications</h2>
               <p className="text-xs text-slate-500">Configure real-time alerts and trigger emails.</p>
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div>
+          <div className="flex items-center justify-between gap-4">
+            <div className="pr-4">
               <span className="text-sm font-semibold text-slate-900 block">Email Alerts for New Registrations</span>
               <span className="text-xs text-slate-500">Receive an email notification whenever a new user registers.</span>
             </div>
-            <label className="relative inline-flex items-center cursor-pointer">
+            <label className="relative inline-flex items-center cursor-pointer shrink-0">
               <input
                 type="checkbox"
                 name="emailAlerts"
