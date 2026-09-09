@@ -9,6 +9,7 @@ import {
 import { useRouter } from 'next/navigation'; 
 import PropertyCategories from '@/component/PropertyCategories';
 import NewsAndArticles from '@/component/NewsAndArticles';
+import IdCard from '@/component/IDCard';
 
 export default function LandingPage() {
   const [activeTab, setActiveTab] = useState('All Properties');
@@ -290,6 +291,10 @@ export default function LandingPage() {
 
       <div className="relative z-10">
         <NewsAndArticles/>
+      </div>
+
+      <div className="relative z-10">
+        <IdCard/>
       </div>
 
     </div>
