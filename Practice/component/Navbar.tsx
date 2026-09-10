@@ -320,18 +320,6 @@ const Navbar = () => {
                 News & Article
               </Link>
 
-              {/* Admin Dashboard */}
-              {/* {user?.role === "admin" && (
-                <Link
-                  href="/admin/dashboard"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2 rounded-lg bg-orange-50 px-3 py-2.5 font-semibold text-orange-700 transition hover:bg-orange-100"
-                >
-                  <Shield className="h-4 w-4" />
-                  Admin Dashboard
-                </Link>
-              )} */}
-
               {/* Mobile Authentication */}
               <div className="mt-2 border-t border-slate-200 pt-3">
                 {user ? (
