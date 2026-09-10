@@ -232,21 +232,6 @@ const Navbar = () => {
               <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-500 transition-all duration-300 ease-out group-hover:w-full" />
             </Link>
 
-            
-
-            {/* Admin Dashboard */}
-            {/* {user?.role === "admin" && (
-              <Link
-                href="/admin/dashboard"
-                className="group relative flex items-center gap-1 whitespace-nowrap py-2 font-semibold text-orange-700 transition-colors duration-300 hover:text-orange-600"
-              >
-                <Shield className="h-4 w-4" />
-
-                <span>Admin Dashboard</span>
-
-                <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-orange-600 transition-all duration-300 ease-out group-hover:w-full" />
-              </Link>
-            )} */}
           </div>
 
           {/* ================= DESKTOP AUTH ================= */}
